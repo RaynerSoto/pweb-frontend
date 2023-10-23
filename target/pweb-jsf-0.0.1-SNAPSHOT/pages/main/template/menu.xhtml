@@ -1,0 +1,60 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <div class="layout-sidebar">
+    	<!-- <div class="layout-sidebar-filter ui-fluid ui-input-filled">
+            <h:form>
+                    <p:autoComplete placeholder="Search by name..." minQueryLength="3" effect="fade" 
+                                panelStyleClass="layout-sidebar-filter-panel" scrollHeight="300" emptyMessage="No results found!">
+                    
+                </p:autoComplete>
+            </h:form>
+        </div> -->
+    
+        <div class="layout-menu">
+                <div class="menu-category">Administración</div>
+                <div class="menu-items">
+                    <h:link outcome="/pages/security/users/user-list.xhtml">
+                        Gestionar usuarios
+                    </h:link>
+                </div>
+                <div class="menu-category">Menú</div>
+                <div class="menu-items">
+                    <p:outputPanel >
+                        <a tabindex="0" class="submenu-link">
+                            Gestionar
+                        </a>
+                        <div class="submenu">
+                            <ul>
+                                <li><h:link outcome="/pages/import.xhtml" >
+                                    Importar Excel
+                                </h:link></li>
+                                <li><h:link>
+                                    Reportes
+                                </h:link></li>
+                            </ul>
+                        </div>
+                    </p:outputPanel>
+                    <p:outputPanel >
+                        <a tabindex="0" class="submenu-link">
+                            Ayuda
+                        </a>
+                        <div class="submenu">
+                            <ul>
+                                <li><h:link >
+                                    Información general
+                                </h:link></li>
+                                <li><h:link>
+                                    Salir
+                                </h:link></li>
+                            </ul>
+                        </div>
+                    </p:outputPanel>
+                </div>
+        </div>
+    </div>
+
+</ui:composition>

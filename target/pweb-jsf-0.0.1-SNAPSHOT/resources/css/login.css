@@ -1,0 +1,8 @@
+@charset "ISO-8859-1";
+html{
+	background-image: url("/system_geo_front/src/main/webapp/resources/images/close-up-de-una-chincheta-roja-sobre-un-mapa-de-la-ciudad-de-la-habana-cuba-ex305f.jpg");
+	
+}
+.p-col{
+	border-bottom-style: groove;
+}
