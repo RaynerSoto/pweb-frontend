@@ -50,7 +50,4 @@ public class UserDto {
 	public void setRol(String rol) {
 		this.rol = rol;
 	}
-	
-	
-	
 }
