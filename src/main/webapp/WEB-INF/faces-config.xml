@@ -5,10 +5,10 @@
 	version="2.3">
 
 	<navigation-rule>
-		<from-view-id>/pages/web_principales/principal.xhtml</from-view-id>
+		<from-view-id>/pages/security/login.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>login</from-outcome>
-			<to-view-id>/pages/web_principales/principal.xhtml
+			<to-view-id>/pages/security/login.xhtml
 			</to-view-id>
 		</navigation-case>
 		<navigation-case>
