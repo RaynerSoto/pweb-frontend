@@ -1,5 +1,6 @@
 package cu.edu.cujae.pweb.dto;
 
+//Rayner
 public class UserDto {
 	private long id;
 	private String nombre;

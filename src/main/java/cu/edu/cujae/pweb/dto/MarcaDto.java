@@ -1,6 +1,7 @@
 package cu.edu.cujae.pweb.dto;
 
 public class MarcaDto {
+	
 	private long identificador;
 	private String nombre;
 	private int cant_asientos;

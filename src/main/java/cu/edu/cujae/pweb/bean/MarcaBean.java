@@ -1,50 +1,50 @@
 package cu.edu.cujae.pweb.bean;
 
+import java.util.ArrayList;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.springframework.stereotype.Component;
+
+import cu.edu.cujae.pweb.dto.MarcaDto;
+
+@Component
 @ManagedBean
 @ViewScoped
 public class MarcaBean {
-	private long id;
-	private String nombre;
-	private int cantidad_asientos;
-	private String tipo_combustible;
-	private double consumo_combustible;
+	
+	private MarcaDto marca;
+	
+	private ArrayList<MarcaDto> listado_marcas;
+	
+	private MarcaDto marca_actual;
+	
 	
 	public MarcaBean() {}
-	
-	public long getId() {
-		return id;
+
+	public ArrayList<MarcaDto> getListado_marcas() {
+		return listado_marcas;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setListado_marcas(ArrayList<MarcaDto> listado_marcas) {
+		this.listado_marcas = listado_marcas;
 	}
-	
-	public String getNombre() {
-		return nombre;
+
+	public MarcaDto getMarca_actual() {
+		return marca_actual;
 	}
-	public int getCantidad_asientos() {
-		return cantidad_asientos;
+
+	public void setMarca_actual(MarcaDto marca_actual) {
+		this.marca_actual = marca_actual;
 	}
-	public String getTipo_combustible() {
-		return tipo_combustible;
+
+	public MarcaDto getMarca() {
+		return marca;
 	}
-	public double getConsumo_combustible() {
-		return consumo_combustible;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public void setCantidad_asientos(int cantidad_asientos) {
-		this.cantidad_asientos = cantidad_asientos;
-	}
-	public void setTipo_combustible(String tipo_combustible) {
-		this.tipo_combustible = tipo_combustible;
-	}
-	public void setConsumo_combustible(double consumo_combustible) {
-		this.consumo_combustible = consumo_combustible;
+
+	public void setMarca(MarcaDto marca) {
+		this.marca = marca;
 	}
 	
 	

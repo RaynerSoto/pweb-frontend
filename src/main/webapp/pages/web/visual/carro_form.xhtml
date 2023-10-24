@@ -1,0 +1,46 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="Carro" showEffect="fade" modal="true"
+		widgetVar="carroDialog" responsive="true">
+		<p:outputPanel id="carroDialog-content" class="ui-fluid">
+			<p:outputPanel">
+				<p:panelGrid layout="grid" columns="2">
+					<h:panelGroup>
+						<div class="p-field">
+							<p:outputLabel for="@next">Placa del carro</p:outputLabel>
+							<p:inputText id="placa" required="true" 
+								value="#{carroBean.carro_select.placa" />
+							<p:message for="@previous" ></p:message>
+						</div>
+						<div class="p-field">
+							<p:outputLabel for="@next">Flotilla</p:outputLabel>
+							<p:inputText id="username" required="true"
+								value="#{carroBean.carro_select.flotilla" />
+							<p:message for="@previous"></p:message>
+						</div>
+						<div class="p-field">
+							<p:outputLabel for="@next">Marca</p:outputLabel>
+							 <p:selectOneMenu id="option" value="#{carroBean.carro_select.marca}">
+                    		<f:selectItem itemLabel="Select One" itemValue=""/>
+                    		<f:selectItem itemLabel="Ferrari" itemValue="Ferrari"/>
+                    		<f:selectItem itemLabel="Mercedes" itemValue="Mercedez"/>
+                    		<f:selectItem itemLabel="Lada" itemValue="Lada"/>
+                		    </p:selectOneMenu>
+					</h:panelGroup>
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<f:facet name="footer">
+			<p:commandButton value="Salvar" icon="pi pi-check"
+				actionListener="#{carroBean.saveUser}"
+				update="manage-user-content" process="manage-user-content @this" />
+			<p:commandButton value="Cancelar" icon="pi pi-times"
+				onclick="PF('carroDialog').hide()" class="ui-button-secondary" />
+		</f:facet>
+	</p:dialog>
+</ui:composition>

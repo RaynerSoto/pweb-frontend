@@ -58,7 +58,4 @@ public class CarroDto {
 	public void setIdentificador(long identificador) {
 		this.identificador = identificador;
 	}
-	
-	
-	
 }
