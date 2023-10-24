@@ -46,6 +46,4 @@ public class MarcaBean {
 	public void setMarca(MarcaDto marca) {
 		this.marca = marca;
 	}
-	
-	
 }
