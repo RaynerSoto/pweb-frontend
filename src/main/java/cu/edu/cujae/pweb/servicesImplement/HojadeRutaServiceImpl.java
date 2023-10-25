@@ -1,9 +1,9 @@
 package cu.edu.cujae.pweb.servicesImplement;
 
 import cu.edu.cujae.pweb.dto.Hoja_de_rutaDto;
-import cu.edu.cujae.pweb.service.hoja_de_rutaService;
+import cu.edu.cujae.pweb.service.HojadeRutaService;
 
-public class hoja_de_rutaservimpl implements hoja_de_rutaService {
+public class HojadeRutaServiceImpl implements HojadeRutaService {
     @Override
     public void insertar_hoja_de_ruta(Hoja_de_rutaDto hoja_de_ruta) {
 

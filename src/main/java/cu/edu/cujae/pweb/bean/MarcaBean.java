@@ -26,10 +26,9 @@ public class MarcaBean {
 	
 	@PostConstruct
 	public void init() {
-		MarcaDto marca = new MarcaDto(1,"Rayner",34,59,10);
+		MarcaDto marca = new MarcaDto(1,"BMW",34,"Gasolina",10);
 		listado_marcas.add(marca);
 	}
-	
 	
 	public ArrayList<MarcaDto> getListado_marcas() {
 		return listado_marcas;
@@ -54,4 +53,24 @@ public class MarcaBean {
 	public void setMarca(MarcaDto marca) {
 		this.marca = marca;
 	}
+	
+	//Comienzo de las implementaciones
+	//Crear nuevo
+	public void openNew() {
+		this.marca_actual = new MarcaDto();
+	}
+	//Modificar
+	public void openForEdit() {
+		
+	}
+	//Salvar
+	public void salveMarca() {
+		
+	}
+	//Eliminar
+	public void deleteMarca() {
+		
+	}
+	
+	
 }

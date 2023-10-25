@@ -5,14 +5,18 @@ public class MarcaDto {
 	private long identificador;
 	private String nombre;
 	private int cant_asientos;
-	private long id_combustible;
+	private String combustible;
 	private double combustible_por_km;
 	
-	public MarcaDto(long identificador, String nombre, int cant_asientos, long id_combustible, double combustible_por_km) {
+	public MarcaDto() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public MarcaDto(long identificador, String nombre, int cant_asientos, String combustible, double combustible_por_km) {
 		this.identificador = identificador;
 		this.nombre = nombre;
 		this.cant_asientos = cant_asientos;
-		this.id_combustible = id_combustible;
+		this.combustible = combustible;
 		this.combustible_por_km = combustible_por_km;
 	}
 
@@ -61,15 +65,15 @@ public class MarcaDto {
 	/**
 	 * @return the id_combustible
 	 */
-	public long getId_combustible() {
-		return id_combustible;
+	public String getId_combustible() {
+		return combustible;
 	}
 
 	/**
 	 * @param id_combustible the id_combustible to set
 	 */
-	public void setId_combustible(long id_combustible) {
-		this.id_combustible = id_combustible;
+	public void setId_combustible(String combustible) {
+		this.combustible = combustible;
 	}
 
 	/**

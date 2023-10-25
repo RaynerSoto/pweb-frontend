@@ -14,11 +14,11 @@
 				<p:toolbar>
 					<p:toolbarGroup>
 						<p:commandButton value="Nuevo" icon="pi pi-plus"
-							actionListener="#{manageUserBean.openNew}"
-							update=":form:manage-user-content"
-							oncomplete="PF('manageUserDialog').show()"
+							actionListener="#{marcaBean.openNew}"
+							update=":form:marca-content"
+							oncomplete="PF('marcaDialog').show()"
 							styleClass="ui-button-success" style="margin-right: .5rem">
-							<p:resetInput target=":form:manage-user-content" />
+							<p:resetInput target=":form:marca-content" />
 						</p:commandButton>
 					</p:toolbarGroup>
 					<p:toolbarGroup align="right">
@@ -29,34 +29,34 @@
 					</p:toolbarGroup>
 				</p:toolbar>
 				
-				<p:dataTable id="dt-users" widgetVar="dtUsers" var="user"
-					value="#{manageUserBean.users}" reflow="true" paginator="true"
+				<p:dataTable id="dt-marcas" widgetVar="dtmarcas" var="marca"
+					value="#{marcaBean.listado_marcas}" reflow="true" paginator="true"
 					rows="10" paginatorPosition="bottom">
 					<f:facet name="header">
 						<div class="products-table-header">
-							<span style="font-weight: bold">Usuarios</span> <span
+							<span style="font-weight: bold">Marcas</span> <span
 								class="filter-container ui-input-icon-left"> <i
 								class="pi pi-search"></i> <p:inputText id="globalFilter"
-									onkeyup="PF('dtUsers').filter()" placeholder="Buscar" />
+									onkeyup="PF('dtmarcas').filter()" placeholder="Buscar" />
 							</span>
 
 						</div>
 					</f:facet>
 					
 
-					<p:column headerText="Usuario" sortBy="#{user.username}" filterBy="#{user.username}">
-						<h:outputText value="#{user.username}" />
+					<p:column headerText="Nombre de marca" sortBy="#{marca.nombre}" filterBy="#{marca.nombre}">
+						<h:outputText value="#{marca.nombre}" />
 					</p:column>
-					<p:column headerText="Ci" sortBy="#{user.identification}"
-						filterBy="#{user.identification}">
-						<h:outputText value="#{user.identification}" />
+					<p:column headerText="Cantidad de asientos" sortBy="#{marca.cant_asientos}"
+						filterBy="#{marca.cant_asientos}">
+						<h:outputText value="#{marca.cant_asientos}" />
 					</p:column>
-					<p:column headerText="Nombre" sortBy="#{user.fullName}">
-						<h:outputText value="#{user.fullName}" />
+					<p:column headerText="Tipo de combustible" sortBy="#{marca.combustible}">
+						<h:outputText value="#{marca.combustible}" />
 					</p:column>
-					<p:column headerText="Correo" sortBy="#{user.email}"
-						filterBy="#{user.email}">
-						<h:outputText value="#{user.email}" />
+					<p:column headerText="Consumo km/h" sortBy="#{marca.combustible_por_km}"
+						filterBy="#{marca.combustible_por_km}">
+						<h:outputText value="#{marca.combustible_por_km}" />
 					</p:column>
 					<p:column exportable="false">
 						<p:commandButton icon="pi pi-pencil" action="#{manageUserBean.openForEdit}"
@@ -80,7 +80,7 @@
 				</p:dataTable>
 
 				<!-- ui:include es una etiqueta de facelet que permite incluir pages y de esta forma el code no se carga tanto -->
-				<ui:include src="user-form.xhtml"></ui:include>
+				<ui:include src="marca_form.xhtml"></ui:include>
 
 				<!-- Este comoponente se utiliza mucho para el caso de los eliminar, que es donde casi siempre se necesita confirmation,
 				su uso es bien sencillo, cada confirmDialog va atado a un p:confirm que es el que se definie dentro del button -->

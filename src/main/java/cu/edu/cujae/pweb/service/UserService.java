@@ -1,12 +1,13 @@
 package cu.edu.cujae.pweb.service;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import cu.edu.cujae.pweb.dto.UserDto;
 
 public interface UserService {
-	public boolean insertar();
-	public boolean modificar();
-	public boolean eliminar();
-	public ArrayList<UserDto> listado_usuarios();
+	List<UserDto> getUsers();
+	UserDto getUserById(String userId);
+	void createUser(UserDto user);
+	void updateUser(UserDto user);
+	void deleteUser(String id);
 }

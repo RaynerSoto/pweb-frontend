@@ -3,7 +3,7 @@ package cu.edu.cujae.pweb.servicesImplement;
 import cu.edu.cujae.pweb.dto.Choferes_fijosDto;
 import cu.edu.cujae.pweb.service.Choferes_fijosService;
 
-public class choferesfijosservimpl implements Choferes_fijosService {
+public class ChoferesFijosImpl implements Choferes_fijosService {
     @Override
     public void insertar_chofer_fijo(Choferes_fijosDto chofer_fijo) {
 

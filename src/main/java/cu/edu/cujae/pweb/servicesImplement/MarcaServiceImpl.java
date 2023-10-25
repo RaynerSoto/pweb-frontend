@@ -5,7 +5,7 @@ import cu.edu.cujae.pweb.service.MarcaService;
 
 import java.util.ArrayList;
 
-public class marca_servimpl implements MarcaService {
+public class MarcaServiceImpl implements MarcaService {
     @Override
     public ArrayList<MarcaDto> cargar_marcar() {
         return null;
