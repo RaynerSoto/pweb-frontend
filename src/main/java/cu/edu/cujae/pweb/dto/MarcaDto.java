@@ -3,10 +3,10 @@ package cu.edu.cujae.pweb.dto;
 public class MarcaDto {
 	
 	private long identificador;
-	private String nombre;
-	private int cant_asientos;
-	private String combustible;
-	private double combustible_por_km;
+	private String nombre;//Interfaz
+	private int cant_asientos;//Interfaz
+	private String combustible;//Interfaz
+	private double combustible_por_km;//Interfaz
 	
 	public MarcaDto() {
 		// TODO Auto-generated constructor stub
@@ -61,21 +61,6 @@ public class MarcaDto {
 	public void setCant_asientos(int cant_asientos) {
 		this.cant_asientos = cant_asientos;
 	}
-
-	/**
-	 * @return the id_combustible
-	 */
-	public String getId_combustible() {
-		return combustible;
-	}
-
-	/**
-	 * @param id_combustible the id_combustible to set
-	 */
-	public void setId_combustible(String combustible) {
-		this.combustible = combustible;
-	}
-
 	/**
 	 * @return the combustible_por_km
 	 */
@@ -88,6 +73,14 @@ public class MarcaDto {
 	 */
 	public void setCombustible_por_km(double combustible_por_km) {
 		this.combustible_por_km = combustible_por_km;
+	}
+
+	public String getCombustible() {
+		return combustible;
+	}
+
+	public void setCombustible(String combustible) {
+		this.combustible = combustible;
 	}
 	
 	

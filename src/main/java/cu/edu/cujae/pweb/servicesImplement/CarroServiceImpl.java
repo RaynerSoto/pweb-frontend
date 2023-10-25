@@ -5,6 +5,9 @@ import cu.edu.cujae.pweb.service.CarroService;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class CarroServiceImpl implements CarroService {
     @Override
     public void insertar_datos(CarroDto car) {

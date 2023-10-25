@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="Marca" showEffect="fade" modal="true"
+		widgetVar="marcaDialog" responsive="true">
+		<p:outputPanel id="marca-content" class="ui-fluid">
+			<p:outputPanel rendered="#{not empty marcaBean.marca_actual}">
+				<p:panelGrid layout="grid" columns="2">
+					<h:panelGroup>
+						<div class="p-field">
+							<p:outputLabel for="@next">Nombre de la marca</p:outputLabel>
+							<p:inputText id="nombre" required="true" 
+								value="#{marcaBean.marca_actual.nombre}" />
+							<p:message for="@previous" ></p:message>
+						</div>
+						<div class="p-field">
+							<p:outputLabel for="@next">Combustible</p:outputLabel>
+							<p:selectOneMenu id="combustible" required="true"
+								value="#{marcaBean.marca_actual.nombre}">
+								<f:selectItem value="#{marcaBean.listado_combustible}"/>
+							</p:selectOneMenu>
+							<p:message for="@previous"></p:message>
+						</div>
+						<div class="p-field">
+							<p:outputLabel for="@next">Cantidad de asientos</p:outputLabel>
+							<p:spinner id="cantAsientos" required="true"
+								value="#{marcaBean.marca_actual.cant_asientos}"
+								min="1">
+							</p:spinner>
+							<p:message for="@previous"></p:message>
+						</div>
+						<div class="p-field">
+							<p:outputLabel for="@next">Km/h</p:outputLabel>
+							<p:spinner id="cantAsientos" required="true"
+								value="#{marcaBean.marca_actual.combustible_por_km}"
+								min="1" stepFactor="0.5">
+							</p:spinner>
+							<p:message for="@previous"></p:message>
+						</div>
+					</h:panelGroup>
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<f:facet name="footer">
+			<p:commandButton value="Salvar" icon="pi pi-check"
+				actionListener="#{marcaBean.salveMarca}"
+				update="manage-user-content" process="marca-content @this" />
+			<p:commandButton value="Cancelar" icon="pi pi-times"
+				onclick="PF('marcaDialog').hide()" class="ui-button-secondary" />
+		</f:facet>
+	</p:dialog>
+</ui:composition>

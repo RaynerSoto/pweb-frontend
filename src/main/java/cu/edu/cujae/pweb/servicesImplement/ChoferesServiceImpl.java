@@ -1,8 +1,11 @@
 package cu.edu.cujae.pweb.servicesImplement;
 
+import org.springframework.stereotype.Service;
+
 import cu.edu.cujae.pweb.dto.ChoferDto;
 import cu.edu.cujae.pweb.service.ChoferesService;
 
+@Service
 public class ChoferesServiceImpl implements ChoferesService {
 
     @Override
