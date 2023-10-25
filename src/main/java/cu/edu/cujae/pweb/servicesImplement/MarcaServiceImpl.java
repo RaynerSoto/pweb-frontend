@@ -5,6 +5,10 @@ import cu.edu.cujae.pweb.service.MarcaService;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Service;
+
+
+@Service
 public class MarcaServiceImpl implements MarcaService {
     @Override
     public ArrayList<MarcaDto> cargar_marcar() {

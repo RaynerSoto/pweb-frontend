@@ -31,6 +31,11 @@ public class MarcaBean {
 		listado_marcas.add(marca);
 	}
 	
+	//Cargando todos los combustibles en String
+	public ArrayList<String> listado_combustible() {
+		return new ArrayList<String>();
+	}
+	
 	public ArrayList<MarcaDto> getListado_marcas() {
 		return listado_marcas;
 	}

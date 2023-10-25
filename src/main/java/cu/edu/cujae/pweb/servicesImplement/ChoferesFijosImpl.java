@@ -1,8 +1,11 @@
 package cu.edu.cujae.pweb.servicesImplement;
 
+import org.springframework.stereotype.Service;
+
 import cu.edu.cujae.pweb.dto.Choferes_fijosDto;
 import cu.edu.cujae.pweb.service.Choferes_fijosService;
 
+@Service
 public class ChoferesFijosImpl implements Choferes_fijosService {
     @Override
     public void insertar_chofer_fijo(Choferes_fijosDto chofer_fijo) {
