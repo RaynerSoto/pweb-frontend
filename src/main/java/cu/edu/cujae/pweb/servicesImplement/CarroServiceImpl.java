@@ -5,12 +5,10 @@ import cu.edu.cujae.pweb.service.CarroService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
-=======
+
 
 import org.springframework.stereotype.Service;
 
->>>>>>> f642fa0cd227bc70502dad120c02e0888a55f7b4
 @Service
 public class CarroServiceImpl implements CarroService {
     @Override

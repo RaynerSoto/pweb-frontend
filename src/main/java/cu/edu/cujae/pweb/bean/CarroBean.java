@@ -7,6 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import cu.edu.cujae.pweb.service.CarroService;
+import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -68,8 +69,13 @@ public class CarroBean {
 	}
 	//Eliminar
 	public void deleteCarro(){
-		this.listado_carros.remove(this.carro_select);
-		this.carro_select=null;
+		try{
+			this.listado_carros.remove(this.carro_select);
+			this.carro_select=null;
+			PrimeFaces.current().ajax().update("form:dt-users");
+		} catch (Exception e) {
+
+		}
 	}
 
 }
