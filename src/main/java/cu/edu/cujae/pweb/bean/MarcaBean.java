@@ -17,7 +17,7 @@ public class MarcaBean {
 	
 	private MarcaDto marca;
 	
-	private ArrayList<MarcaDto> listado_marcas;
+	private ArrayList<MarcaDto> listado_marcas = new ArrayList<MarcaDto>();
 	
 	private MarcaDto marca_actual;
 	
@@ -26,6 +26,7 @@ public class MarcaBean {
 	
 	@PostConstruct
 	public void init() {
+		listado_marcas = new ArrayList<MarcaDto>();
 		MarcaDto marca = new MarcaDto(1,"BMW",34,"Gasolina",10);
 		listado_marcas.add(marca);
 	}
@@ -71,6 +72,4 @@ public class MarcaBean {
 	public void deleteMarca() {
 		
 	}
-	
-	
 }
