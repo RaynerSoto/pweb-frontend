@@ -52,7 +52,7 @@ public class ManageUserBean {
 		roles = roleService.getRoles();
     }
 	
-	//Se ejecuta al dar clic en el button Nuevo
+	//Se ejecuta al dar clic en el button Nuevo//siempre asi crea el boton
 	public void openNew() {
         this.selectedUser = new UserDto();
         this.selectedRoles = null;

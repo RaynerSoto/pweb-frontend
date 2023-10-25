@@ -1,0 +1,48 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog header="Carro" showEffect="fade" modal="true"
+              widgetVar="CarroDialog" responsive="true">
+        <p:outputPanel id="Carro-content" class="ui-fluid">
+            <p:outputPanel rendered="#{not empty CarroBean.carro_select}">
+                <p:panelGrid layout="grid" columns="2">
+
+                    <h:panelGroup>
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Marca</p:outputLabel>
+                            <p:inputText id="marca" required="true"
+                                         value="#{CarroBean.carro_select.marca}" />
+                            <p:message for="@previous" ></p:message>
+                        </div>
+
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Placa</p:outputLabel>
+                            <p:inputText id="placa" required="true" value="#{CarroBean.carro_select.placa}" />
+                            <p:message for="@previous"></p:message>
+                        </div>
+
+                        <div class="p-field">
+                            <p:outputLabel for="@next">Flotilla</p:outputLabel>
+                            <p:inputText id="flotilla" required="true" value="#{CarroBean.carro_select.flotilla}" maxlength="11">
+                                <p:keyFilter mask="num" />
+                            </p:inputText>
+                            <p:message for="@previous"></p:message>
+
+                        </div>
+
+                    </h:panelGroup>
+
+                </p:panelGrid>
+            </p:outputPanel>
+        </p:outputPanel>
+
+        <f:facet name="footer">
+            <p:commandButton value="Salvar" icon="pi pi-check" actionListener="#{CarroBean.SaveCarro}" update="manage-user-content" process="manage-user-content @this" />
+            <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('manageUserDialog').hide()" class="ui-button-secondary" />
+        </f:facet>
+
+    </p:dialog>
+</ui:composition>
