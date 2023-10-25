@@ -5,14 +5,14 @@ public class CarroDto {
 	private String flotilla;
 	private String placa;
 	private long identificador;
-	private String id_marca;
+	private String marca;
 	
 	public CarroDto(String flotilla, String placa, long identificador, String id_marca) {
 		super();
 		this.flotilla = flotilla;
 		this.placa = placa;
 		this.identificador = identificador;
-		this.id_marca = id_marca;
+		this.marca = id_marca;
 	}
 	
 	public CarroDto() {
@@ -29,7 +29,7 @@ public class CarroDto {
 		return identificador;
 	}
 	public String getId_marca() {
-		return id_marca;
+		return marca;
 	}
 	public void setFlotilla(String flotilla) {
 		this.flotilla = flotilla;
@@ -41,7 +41,7 @@ public class CarroDto {
 		this.identificador = identificador;
 	}
 	public void setId_marca(String id_marca) {
-		this.id_marca = id_marca;
+		this.marca = id_marca;
 	}
 	
 	

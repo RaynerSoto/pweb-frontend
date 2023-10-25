@@ -2,6 +2,7 @@ package cu.edu.cujae.pweb.bean;
 
 import java.util.ArrayList;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -22,7 +23,14 @@ public class MarcaBean {
 	
 	
 	public MarcaBean() {}
-
+	
+	@PostConstruct
+	public void init() {
+		MarcaDto marca = new MarcaDto(1,"Rayner",34,59,10);
+		listado_marcas.add(marca);
+	}
+	
+	
 	public ArrayList<MarcaDto> getListado_marcas() {
 		return listado_marcas;
 	}

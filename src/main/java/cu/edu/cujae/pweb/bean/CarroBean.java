@@ -2,6 +2,7 @@ package cu.edu.cujae.pweb.bean;
 
 import java.util.ArrayList;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -28,6 +29,12 @@ public class CarroBean {
 	public CarroBean() {
 		
 	}
+	
+	@PostConstruct
+	public void init() {
+		
+	}
+	
 	
 	public CarroDto getCarro() {
 		return carro;
