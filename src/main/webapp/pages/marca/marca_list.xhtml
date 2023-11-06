@@ -6,73 +6,71 @@
 
 <ui:composition template="/pages/template/layout.xhtml">
 	<ui:define name="title">
-		    Listado de marcas
+		Listado de marcas
 	</ui:define>
-	<ui:define name="layout">"scr/main/webapp/pages/marca/marca_form.xhtml"
+	<ui:define name="src/main/webapp/pages/marca/marca_list.xhtml">
 		<h:form id="form">
 			<div class="card crud-demo">
 				<p:toolbar>
 					<p:toolbarGroup>
 						<p:commandButton value="Nuevo" icon="pi pi-plus"
-							actionListener="#{marcaBean.openNew}"
-							update=":form:marca-content"
-							oncomplete="PF('marcaDialog').show()"
-							styleClass="ui-button-success" style="margin-right: .5rem">
+										 actionListener="#{marcaBean.openNew}"
+										 update=":form:marca-content"
+										 oncomplete="PF('marcaDialog').show()"
+										 styleClass="ui-button-success" style="margin-right: .5rem">
 							<p:resetInput target=":form:marca-content" />
 						</p:commandButton>
 					</p:toolbarGroup>
 					<p:toolbarGroup align="right">
 						<p:commandButton value="Export" icon="pi pi-upload"
-							styleClass="ui-button-help" ajax="false">
+										 styleClass="ui-button-help" ajax="false">
 							<p:dataExporter type="pdf" target="dtmarcas" fileName="marcas" />
 						</p:commandButton>
 					</p:toolbarGroup>
 				</p:toolbar>
-				
 				<p:dataTable id="dt-marcas" widgetVar="dtmarcas" var="marca"
-					value="#{marcaBean.listado_marcas}" reflow="true" paginator="true"
-					rows="10" paginatorPosition="bottom">
+							 value="#{marcaBean.listado_marcas}" reflow="true" paginator="true"
+							 rows="10" paginatorPosition="bottom">
 					<f:facet name="header">
 						<div class="products-table-header">
 							<span style="font-weight: bold">Marcas</span> <span
 								class="filter-container ui-input-icon-left"> <i
 								class="pi pi-search"></i> <p:inputText id="globalFilter"
-									onkeyup="PF('dtmarcas').filter()" placeholder="Buscar" />
+																	   onkeyup="PF('dtmarcas').filter()" placeholder="Buscar" />
 							</span>
 
 						</div>
 					</f:facet>
-					
 
 					<p:column headerText="Nombre de marca" sortBy="#{marca.nombre}" filterBy="#{marca.nombre}">
 						<h:outputText value="#{marca.nombre}" />
 					</p:column>
 					<p:column headerText="Cantidad de asientos" sortBy="#{marca.cant_asientos}"
-						filterBy="#{marca.cant_asientos}">
+							  filterBy="#{marca.cant_asientos}">
 						<h:outputText value="#{marca.cant_asientos}" />
 					</p:column>
 					<p:column headerText="Tipo de combustible" sortBy="#{marca.combustible}">
 						<h:outputText value="#{marca.combustible}" />
 					</p:column>
 					<p:column headerText="Consumo km/h" sortBy="#{marca.combustible_por_km}"
-						filterBy="#{marca.combustible_por_km}">
+							  filterBy="#{marca.combustible_por_km}">
 						<h:outputText value="#{marca.combustible_por_km}" />
 					</p:column>
 					<p:column exportable="false">
 						<p:commandButton icon="pi pi-pencil" action="#{marcaBean.openForEdit}"
-							update=":form:marca-content"
-							oncomplete="PF('marcaDialog').show()"
-							styleClass="edit-button rounded-button ui-button-success"
-							process="@this">
+										 update=":form:marca-content"
+										 oncomplete="PF('marcaDialog').show()"
+										 styleClass="edit-button rounded-button ui-button-success"
+										 process="@this">
 							<f:setPropertyActionListener value="#{marca}"
-								target="#{marcaBean.marca_actual}" />
+														 target="#{marcaBean.marca_actual}" />
 							<p:resetInput target=":form:marca-content" />
 						</p:commandButton>
 						<p:commandButton class="ui-button-warning rounded-button"
-							icon="pi pi-trash" process="@this" 
-							action="#{marcaBean.deleteMarca}" >
+										 icon="pi pi-trash" process="@this"
+										 action="#{marcaBean.deleteMarca}" >
 							<f:setPropertyActionListener value="#{marca}"
-								target="#{marcaBean.marca_actual}" />
+														 target="#{marcaBean.marca_actual}" />
 							<p:confirm header="Confirmar" message="¿Está seguro de eliminar la marca?" icon="pi pi-exclamation-triangle"/>
 						</p:commandButton>
 					</p:column>
@@ -86,12 +84,19 @@
 				su uso es bien sencillo, cada confirmDialog va atado a un p:confirm que es el que se definie dentro del button -->
 				<p:confirmDialog global="true" showEffect="fade" width="300">
 					<p:commandButton value="Si" type="button"
-						styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+									 styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
 					<p:commandButton value="No" type="button"
-						styleClass="ui-confirmdialog-no ui-button-secondary"
-						icon="pi pi-times" />
+									 styleClass="ui-confirmdialog-no ui-button-secondary"
+									 icon="pi pi-times" />
 				</p:confirmDialog>
+
 			</div>
+			<p:toolbarGroup align="right">
+				<p:commandButton value="Export" icon="pi pi-upload"
+								 styleClass="ui-button-help" ajax="false">
+					<p:dataExporter type="pdf" target="dtmarcas" fileName="marcas" />
+				</p:commandButton>
+			</p:toolbarGroup>
 		</h:form>
 	</ui:define>
 </ui:composition>
