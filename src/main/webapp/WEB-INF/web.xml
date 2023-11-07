@@ -44,4 +44,7 @@
  	<welcome-file-list>
         <welcome-file>pages/marca/marca_list.jsf</welcome-file>
     </welcome-file-list>
+    <welcome-file-list>
+        <welcome-file>pages/Carro/carro_list.jsf</welcome-file>
+    </welcome-file-list>
 </web-app>
