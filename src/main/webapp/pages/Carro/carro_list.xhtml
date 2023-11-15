@@ -8,14 +8,14 @@
     <ui:define name="title">
         Listado de Carros
     </ui:define>
-    <ui:define name="src/main/webapp/pages/Carro/carro_list.xhtml">
+    <ui:define name="layout">"src/main/webapp/pages/Carro/carro_list.xhtml"
         <h:form id="form">
             <div class="card crud-demo">
                 <p:toolbar>
                     <p:toolbarGroup>
                         <p:commandButton
                                 value="Nuevo" icon="pi pi-plus"
-                                actionListener="#{CarroBean.openNew}"
+                                actionListener="#{carroBean.openNew}"
                                 update=":form:Carro-content"
                                 oncomplete="PF('CarroDialog').show()"
                                 styleClass="ui-button-success" style="margin-right: .5rem">

@@ -23,7 +23,7 @@ public class CarroBean {
 	private CarroDto carro;
 	private CarroDto carro_select;
 	private ArrayList<CarroDto> listado_carros;
-
+	private ArrayList<String> listado_marcas;
 	public CarroBean() {
 	}
 
@@ -43,6 +43,9 @@ public class CarroBean {
 	public ArrayList<CarroDto> getListado_carros() {
 		return listado_carros;
 	}
+	public ArrayList<String> getListado_marcas() {
+		return listado_marcas;
+	}
 	public void setCarro(CarroDto carro) {
 		this.carro = carro;
 	}
@@ -52,7 +55,9 @@ public class CarroBean {
 	public void setListado_carros(ArrayList<CarroDto> listado_carros) {
 		this.listado_carros = listado_carros;
 	}
-
+	public void setListado_marcas(ArrayList<String> listado_marcas) {
+		this.listado_marcas = listado_marcas;
+	}
 	// Implementaciones
 	// Se ejecuta al dar clic en Nuevo (Crea el boton)
 	public void openNew(){
