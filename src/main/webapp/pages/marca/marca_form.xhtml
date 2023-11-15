@@ -20,7 +20,7 @@
 							<p:outputLabel for="@next">Combustible</p:outputLabel>
 							<p:selectOneMenu id="combustible" required="true"
 								value="#{marcaBean.marca_actual.nombre}">
-								<f:selectItem value="#{marcaBean.listado_combustible}"/>
+								<f:selectItem value="#{MarcaBean.listado_combustible}"/>
 							</p:selectOneMenu>
 							<p:message for="@previous"></p:message>
 						</div>
@@ -34,7 +34,7 @@
 						</div>
 						<div class="p-field">
 							<p:outputLabel for="@next">Km/h</p:outputLabel>
-							<p:spinner id="cantAsientos" required="true"
+							<p:spinner id="km" required="true"
 								value="#{marcaBean.marca_actual.combustible_por_km}"
 								min="1" stepFactor="0.5">
 							</p:spinner>
@@ -48,7 +48,7 @@
 		<f:facet name="footer">
 			<p:commandButton value="Salvar" icon="pi pi-check"
 				actionListener="#{marcaBean.salveMarca}"
-				update="manage-user-content" process="marca-content @this" />
+				update="marca-content" process="marca-content @this" />
 			<p:commandButton value="Cancelar" icon="pi pi-times"
 				onclick="PF('marcaDialog').hide()" class="ui-button-secondary" />
 		</f:facet>
