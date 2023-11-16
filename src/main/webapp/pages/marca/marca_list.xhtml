@@ -6,7 +6,7 @@
 
 <ui:composition template="/pages/template/layout.xhtml">
 	<ui:define name="title">
-		Listado de marcas
+		<p:outputLabel value="#{msgs.message_marca_listado}"></p:outputLabel>
 	</ui:define>
 	<ui:define name="layout">"src/main/webapp/pages/marca/marca_list.xhtml"
 		<h:form id="form">
@@ -22,7 +22,7 @@
 						</p:commandButton>
 					</p:toolbarGroup>
 					<p:toolbarGroup align="right">
-						<p:commandButton value="Export" icon="pi pi-upload"
+						<p:commandButton value="#{msgs.message_exportar}" icon="pi pi-upload"
 										 styleClass="ui-button-help" ajax="false">
 							<p:dataExporter type="pdf" target="dtmarcas" fileName="marcas" />
 						</p:commandButton>
@@ -33,7 +33,7 @@
 							 rows="10" paginatorPosition="bottom">
 					<f:facet name="header">
 						<div class="products-table-header">
-							<span style="font-weight: bold">Marcas</span> <span
+							<span style="font-weight: bold" value="#{msgs.message_marcas}"></span> <span
 								class="filter-container ui-input-icon-left"> <i
 								class="pi pi-search"></i> <p:inputText id="globalFilter"
 																	   onkeyup="PF('dtmarcas').filter()" placeholder="Buscar" />
