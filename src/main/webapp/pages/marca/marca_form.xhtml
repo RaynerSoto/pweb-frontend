@@ -11,13 +11,13 @@
 				<p:panelGrid layout="grid" columns="2">
 					<h:panelGroup>
 						<div class="p-field">
-							<p:outputLabel for="@next">Nombre de la marca</p:outputLabel>
+							<p:outputLabel for="@next" value="#{msgs.message_insertar_nombre_marca}"></p:outputLabel>
 							<p:inputText id="nombre" required="true" 
 								value="#{marcaBean.marca_actual.nombre}" />
 							<p:message for="@previous" ></p:message>
 						</div>
 						<div class="p-field">
-							<p:outputLabel for="@next">Combustible</p:outputLabel>
+							<p:outputLabel for="@next" value="#{msgs.message_insertar_combustible}"></p:outputLabel>
 							<p:selectOneMenu id="combustible" required="true"
 								value="#{marcaBean.marca_actual.nombre}">
 								<f:selectItem value="#{MarcaBean.listado_combustible}"/>
@@ -25,7 +25,7 @@
 							<p:message for="@previous"></p:message>
 						</div>
 						<div class="p-field">
-							<p:outputLabel for="@next">Cantidad de asientos</p:outputLabel>
+							<p:outputLabel for="@next" value="#{msgs.message_marca_cantidad_asientos}"></p:outputLabel>
 							<p:spinner id="cantAsientos" required="true"
 								value="#{marcaBean.marca_actual.cant_asientos}"
 								min="1">
@@ -33,7 +33,7 @@
 							<p:message for="@previous"></p:message>
 						</div>
 						<div class="p-field">
-							<p:outputLabel for="@next">Km/h</p:outputLabel>
+							<p:outputLabel for="@next" value="#{msgs.kilometroXhora}"></p:outputLabel>
 							<p:spinner id="km" required="true"
 								value="#{marcaBean.marca_actual.combustible_por_km}"
 								min="1" stepFactor="0.5">
@@ -46,10 +46,10 @@
 		</p:outputPanel>
 
 		<f:facet name="footer">
-			<p:commandButton value="Salvar" icon="pi pi-check"
+			<p:commandButton value="#{msgs.guardar}" icon="pi pi-check"
 				actionListener="#{marcaBean.salveMarca}"
 				update="marca-content" process="marca-content @this" />
-			<p:commandButton value="Cancelar" icon="pi pi-times"
+			<p:commandButton value="#{msgs.cancelar}" icon="pi pi-times"
 				onclick="PF('marcaDialog').hide()" class="ui-button-secondary" />
 		</f:facet>
 	</p:dialog>
