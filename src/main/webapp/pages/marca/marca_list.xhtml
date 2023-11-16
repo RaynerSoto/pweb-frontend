@@ -6,7 +6,7 @@
 
 <ui:composition template="/pages/template/layout.xhtml">
 	<ui:define name="title">
-		<p:outputLabel value="#{msgs.message_marca_listado}"></p:outputLabel>
+		<h1 value="#{msgs.message_marca_listado}"></h1>
 	</ui:define>
 	<ui:define name="layout">"src/main/webapp/pages/marca/marca_list.xhtml"
 		<h:form id="form">
@@ -36,22 +36,22 @@
 							<span style="font-weight: bold" value="#{msgs.message_marcas}"></span> <span
 								class="filter-container ui-input-icon-left"> <i
 								class="pi pi-search"></i> <p:inputText id="globalFilter"
-																	   onkeyup="PF('dtmarcas').filter()" placeholder="Buscar" />
+																	   onkeyup="PF('dtmarcas').filter()" placeholder="#{msgs.buscar}" />
 							</span>
 						</div>
 					</f:facet>
 
-					<p:column headerText="Nombre de marca" sortBy="#{marca.nombre}" filterBy="#{marca.nombre}">
+					<p:column headerText="#{msgs.message_marca_nombre}" sortBy="#{marca.nombre}" filterBy="#{marca.nombre}">
 						<h:outputText value="#{marca.nombre}" />
 					</p:column>
-					<p:column headerText="Cantidad de asientos" sortBy="#{marca.cant_asientos}"
+					<p:column headerText="#{msgs.message_marca_cantidad_asientos}" sortBy="#{marca.cant_asientos}"
 							  filterBy="#{marca.cant_asientos}">
 						<h:outputText value="#{marca.cant_asientos}" />
 					</p:column>
-					<p:column headerText="Tipo de combustible" sortBy="#{marca.combustible}">
+					<p:column headerText="#{msgs.message_nombre_combustible}" sortBy="#{marca.combustible}">
 						<h:outputText value="#{marca.combustible}" />
 					</p:column>
-					<p:column headerText="Consumo km/h" sortBy="#{marca.combustible_por_km}"
+					<p:column headerText="#{msgs.message_consumo}" sortBy="#{marca.combustible_por_km}"
 							  filterBy="#{marca.combustible_por_km}">
 						<h:outputText value="#{marca.combustible_por_km}" />
 					</p:column>
@@ -70,7 +70,7 @@
 										 action="#{marcaBean.deleteMarca}" >
 							<f:setPropertyActionListener value="#{marca}"
 														 target="#{marcaBean.marca_actual}" />
-							<p:confirm header="Confirmar" message="¿Está seguro de eliminar la marca?" icon="pi pi-exclamation-triangle"/>
+							<p:confirm header="#{msgs.confirmar}" message="#{msgs.message_confirmar_eliminar_marca}" icon="pi pi-exclamation-triangle"/>
 						</p:commandButton>
 					</p:column>
 
