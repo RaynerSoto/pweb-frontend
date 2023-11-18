@@ -1,4 +1,4 @@
-package cu.edu.cujae.pweb.dto;
+package cu.edu.cujae.pwebbackend.core.dto;
 
 import java.util.List;
 

@@ -1,15 +1,17 @@
-package cu.edu.cujae.pweb.dto;
+package cu.edu.cujae.pwebbackend.core.dto;
 
 import java.sql.Date;
 
 public class Hoja_de_rutaDto {
 	private long identificador;
-	private long id_carro;
+	private String id_carro;
 	private Date fecha;
 	private double kms;
 	private String ci;
-	
-	public Hoja_de_rutaDto(long identificador, long id_carro, Date fecha, double kms,String ci) {
+
+	public Hoja_de_rutaDto() {}
+
+	public Hoja_de_rutaDto(long identificador, String id_carro, Date fecha, double kms, String ci) {
 		super();
 		this.identificador = identificador;
 		this.id_carro = id_carro;
@@ -32,13 +34,13 @@ public class Hoja_de_rutaDto {
 	/**
 	 * @return the id_carro
 	 */
-	public long getId_carro() {
+	public String getId_carro() {
 		return id_carro;
 	}
 	/**
 	 * @param id_carro the id_carro to set
 	 */
-	public void setId_carro(long id_carro) {
+	public void setId_carro(String id_carro) {
 		this.id_carro = id_carro;
 	}
 	/**

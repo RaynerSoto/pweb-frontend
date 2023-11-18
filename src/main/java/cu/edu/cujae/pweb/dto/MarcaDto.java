@@ -1,4 +1,4 @@
-package cu.edu.cujae.pweb.dto;
+package cu.edu.cujae.pwebbackend.core.dto;
 
 public class MarcaDto {
 	

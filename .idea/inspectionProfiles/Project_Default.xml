@@ -1,0 +1,12 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="ArrayEquality" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="ArrayObjectsEquals" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="EqualsBetweenInconvertibleTypes" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="NewObjectEquality" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="NumberEquality" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="ObjectEquality" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="StringEquality" enabled="true" level="ERROR" enabled_by_default="true" />
+  </profile>
+</component>

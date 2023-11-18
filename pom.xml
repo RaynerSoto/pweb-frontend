@@ -115,6 +115,18 @@
 	    <version>5.4.6</version>
 	</dependency>
 
+		<!-- Pretty faces -->
+		<dependency>
+			<groupId>org.ocpsoft.rewrite</groupId>
+			<artifactId>rewrite-servlet</artifactId>
+			<version>3.4.4.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ocpsoft.rewrite</groupId>
+			<artifactId>rewrite-config-prettyfaces</artifactId>
+			<version>3.4.4.Final</version>
+		</dependency>
+
 	</dependencies>
   
 </project>

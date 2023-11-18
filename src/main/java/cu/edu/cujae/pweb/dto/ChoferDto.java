@@ -1,28 +1,22 @@
-package cu.edu.cujae.pweb.dto;
+package cu.edu.cujae.pwebbackend.core.dto;
 
 public class ChoferDto {
-	private long identificador;
 	private String nombre;
 	private String ci;
 	private String direccion;
 	private String telefono;
 	private String provincia;
 	private String marca;
-	
-	public ChoferDto(long identificador, String nombre, String ci, String direccion, String telefono, String provincia,
-			String marca) {
-		super();
-		this.identificador = identificador;
+
+	public ChoferDto() {}
+
+	public ChoferDto(String nombre, String ci, String direccion, String telefono, String provincia, String marca) {
 		this.nombre = nombre;
 		this.ci = ci;
 		this.direccion = direccion;
 		this.telefono = telefono;
 		this.provincia = provincia;
 		this.marca = marca;
-	}
-
-	public long getIdentificador() {
-		return identificador;
 	}
 
 	public String getNombre() {
@@ -47,10 +41,6 @@ public class ChoferDto {
 
 	public String getMarca() {
 		return marca;
-	}
-
-	public void setIdentificador(long identificador) {
-		this.identificador = identificador;
 	}
 
 	public void setNombre(String nombre) {
