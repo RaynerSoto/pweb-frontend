@@ -1,4 +1,4 @@
-package cu.edu.cujae.pwebbackend.core.dto;
+package cu.edu.cujae.pweb.dto;
 
 /**
  * @author Rayner
