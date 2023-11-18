@@ -1,16 +1,12 @@
 package cu.edu.cujae.pweb.bean;
 
 import cu.edu.cujae.pweb.dto.CombustibleDto;
-import cu.edu.cujae.pweb.dto.RoleDto;
-import cu.edu.cujae.pweb.dto.UserDto;
 import org.primefaces.PrimeFaces;
 import org.springframework.stereotype.Component;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 @Component
 @ManagedBean
@@ -62,8 +58,8 @@ public class CombustibleBean {
 
     //Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
     public void saveUser() {
-        if (this.combustibleDto_seleccionado.getNombre().trim().length() == 0){
-
+        if(this.combustibleDto_seleccionado.getNombre().trim().equalsIgnoreCase("")){
+          System.out.println("Esto está vacío");
         }
         else{
 
