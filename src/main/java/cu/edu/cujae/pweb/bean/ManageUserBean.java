@@ -9,21 +9,20 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.view.ViewScoped;
 
+import cu.edu.cujae.pweb.service.RoleService;
+import cu.edu.cujae.pweb.service.UserService;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cu.edu.cujae.pweb.dto.RoleDto;
 import cu.edu.cujae.pweb.dto.UserDto;
-import cu.edu.cujae.pweb.service.RoleService;
-import cu.edu.cujae.pweb.service.UserService;
 
 
 @Component //Le indica a spring es un componete registrado
 @ManagedBean
 @ViewScoped //Este es el alcance utilizado para trabajar con Ajax
 public class ManageUserBean {
-	
 	private UserDto userDto;
 	private UserDto selectedUser;
 	private List<UserDto> users;
@@ -48,8 +47,9 @@ public class ManageUserBean {
 	//Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase. 
 	@PostConstruct
     public void init() {
+		/*
 	    users = users == null ? userService.getUsers() : users;
-		roles = roleService.getRoles();
+		roles = roleService.getRoles();*/
     }
 	
 	//Se ejecuta al dar clic en el button Nuevo//siempre asi crea el boton
@@ -137,5 +137,4 @@ public class ManageUserBean {
 	public void setRoles(List<RoleDto> roles) {
 		this.roles = roles;
 	}
-
 }

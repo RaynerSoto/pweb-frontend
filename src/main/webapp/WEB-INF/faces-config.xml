@@ -8,7 +8,7 @@
 		<from-view-id>/pages/security/login.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>login</from-outcome>
-			<to-view-id>/pages/security/login.xhtml
+			<to-view-id>/pages/welcome/welcome.xhtml
 			</to-view-id>
 		</navigation-case>
 		<navigation-case>
@@ -22,6 +22,7 @@
 			</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+
 
 	<application>
 	    <action-listener>org.primefaces.application.DialogActionListener</action-listener>

@@ -4,6 +4,7 @@ import cu.edu.cujae.pweb.dto.CombustibleDto;
 import org.primefaces.PrimeFaces;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.util.ArrayList;
@@ -43,7 +44,9 @@ public class CombustibleBean {
     //Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase.
     @PostConstruct
     public void init() {
-       //Ahora mismo no hace nada
+        listado_combustibles = new ArrayList<>();
+        listado_combustibles.add(new CombustibleDto(1,"Gasolina"));
+        listado_combustibles.add(new CombustibleDto(1,"Diesel"));
     }
 
     //Se ejecuta al dar clic en el button Nuevo//siempre asi crea el boton
@@ -57,7 +60,7 @@ public class CombustibleBean {
     }
 
     //Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
-    public void saveUser() {
+    public void saveCombustible() {
         if(this.combustibleDto_seleccionado.getNombre().trim().equalsIgnoreCase("")){
           System.out.println("Esto está vacío");
         }
@@ -67,7 +70,7 @@ public class CombustibleBean {
     }
 
     //Permite eliminar un usuario
-    public void deleteUser() {
+    public void deleteCombustible() {
 
     }
 
