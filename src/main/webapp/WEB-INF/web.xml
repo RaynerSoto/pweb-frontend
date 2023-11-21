@@ -42,6 +42,6 @@
         </session-timeout>
     </session-config>
  	<welcome-file-list>
-        <welcome-file>pages/combustible/combustible_list.jsf</welcome-file>
+        <welcome-file>pages/web/principal.jsf</welcome-file>
     </welcome-file-list>
 </web-app>
