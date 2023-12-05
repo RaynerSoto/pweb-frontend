@@ -1,4 +1,4 @@
-package cu.edu.cujae.pweb.exception;
+package cu.edu.cujae.pweb.util;
 
 public class BadException extends Exception{
     public BadException() {

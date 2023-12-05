@@ -8,9 +8,9 @@ import java.util.ArrayList;
  * @version 1.0
  */
 public interface CombustibleService {
-    public void inserta_combustible(CombustibleDto combustibleDto) throws Exception;
-    public void modificar_combustible(CombustibleDto combustibleDto)throws Exception;
-    public void eliminar_combustible(Long id)throws Exception;
+    public Exception inserta_combustible(CombustibleDto combustibleDto);
+    public Exception modificar_combustible(CombustibleDto combustibleDto);
+    public Exception eliminar_combustible(Long id);
     public ArrayList<CombustibleDto>listado_combustibles()throws Exception;
     public CombustibleDto obtener_combustible(long id)throws Exception;
 

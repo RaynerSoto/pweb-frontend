@@ -68,7 +68,7 @@ public class RoleServiceImpl implements RoleService {
 		    String response = (String)restService.GET(uri, params, String.class).getBody();
 		    role = apiRestMapper.mapOne(response, RoleDto.class);
 		} catch (Exception e) {
-			// TODO: handle exception
+			// TODO: handle util
 		}
 		return role;
 	}

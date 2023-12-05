@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 		    String response = (String)restService.GET(uri, params, String.class).getBody();
 		    user = apiRestMapper.mapOne(response, UserDto.class);
 		} catch (Exception e) {
-			// TODO: handle exception
+			// TODO: handle util
 		}
 		return user;
 	}

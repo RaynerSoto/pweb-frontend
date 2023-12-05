@@ -1,4 +1,4 @@
-package cu.edu.cujae.pweb.exception;
+package cu.edu.cujae.pweb.util;
 
 public class GoodException extends Exception{
     public GoodException() {

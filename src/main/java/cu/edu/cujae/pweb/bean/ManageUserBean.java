@@ -11,6 +11,7 @@ import javax.faces.view.ViewScoped;
 
 import cu.edu.cujae.pweb.service.RoleService;
 import cu.edu.cujae.pweb.service.UserService;
+import cu.edu.cujae.pweb.utils.JsfUtils;
 import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -75,10 +76,7 @@ public class ManageUserBean {
             }
             
             this.users.add(this.selectedUser);
-            //JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_user_added"); //Este code permite mostrar un mensaje exitoso (FacesMessage.SEVERITY_INFO) obteniendo el mensage desde el fichero de recursos, con la llave message_user_added
-        }
-        else {
-            //JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_user_edited");
+            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "message_user_edited");
         }
 
         PrimeFaces.current().executeScript("PF('manageUserDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar

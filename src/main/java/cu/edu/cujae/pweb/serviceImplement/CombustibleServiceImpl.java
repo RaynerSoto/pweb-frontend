@@ -1,11 +1,13 @@
 package cu.edu.cujae.pweb.serviceImplement;
 
-import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import cu.edu.cujae.pweb.dto.CombustibleDto;
+import cu.edu.cujae.pweb.util.BadException;
+import cu.edu.cujae.pweb.util.GoodException;
 import cu.edu.cujae.pweb.service.CombustibleService;
 import cu.edu.cujae.pweb.utils.RestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 
 @Service
@@ -14,23 +16,25 @@ public class CombustibleServiceImpl implements CombustibleService {
     private RestService restService;
 
     @Override
-    public void inserta_combustible(CombustibleDto combustibleDto) throws Exception {
+    public Exception inserta_combustible(CombustibleDto combustibleDto){
+        Exception exception = new Exception();
         try {
-            String respuesta = (String) restService.POST("/api/vi//api/v1/combustibles",combustibleDto,String.class).getBody();
-            System.out.println(respuesta);
+            exception = (GoodException) restService.POST("/api/v1/combustibles/",combustibleDto,String.class).getBody();
         }catch (Exception e){
-            e.printStackTrace();
+            exception = (BadException) restService.POST("/api/v1/combustibles/",combustibleDto,String.class).getBody();
+        }finally {
+            return exception;
         }
     }
 
     @Override
-    public void modificar_combustible(CombustibleDto combustibleDto) throws Exception {
-
+    public Exception modificar_combustible(CombustibleDto combustibleDto){
+        return null;
     }
 
     @Override
-    public void eliminar_combustible(Long id) throws Exception {
-
+    public Exception eliminar_combustible(Long id){
+        return null;
     }
 
     @Override

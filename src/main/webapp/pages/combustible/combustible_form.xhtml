@@ -13,7 +13,7 @@
                         <div class="p-field">
                             <p:outputLabel for="@next" value="#{msgs.message_insertar_combustible}"></p:outputLabel>
                             <p:inputText id="nombre" required="true"
-                                         value="#{marcaBean.marca_actual.nombre}" />
+                                         value="#{combustibleBean.combustibleDto_seleccionado.nombre}" />
                             <p:message for="@previous" ></p:message>
                         </div>
                     </h:panelGroup>
