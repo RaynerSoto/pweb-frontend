@@ -1,12 +1,12 @@
 package cu.edu.cujae.pweb.serviceImplement;
 
 import cu.edu.cujae.pweb.dto.Hoja_de_rutaDto;
-import cu.edu.cujae.pweb.service.HojaderutaService;
+import cu.edu.cujae.pweb.service.HojadeRutaService;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
-public class HojaderutaServiceImpl implements HojaderutaService {
+public class HojaderutaServiceImpl implements HojadeRutaService {
 
     @Override
     public void insertar_hoja_de_ruta(Hoja_de_rutaDto hoja_de_ruta) {

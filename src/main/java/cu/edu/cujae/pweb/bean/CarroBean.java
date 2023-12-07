@@ -3,10 +3,14 @@ package cu.edu.cujae.pweb.bean;
 import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import cu.edu.cujae.pweb.dto.MarcaDto;
 import cu.edu.cujae.pweb.service.CarroService;
+import cu.edu.cujae.pweb.utils.JsfUtils;
+import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,14 +27,14 @@ public class CarroBean {
 	private CarroDto carro;
 	private CarroDto carro_select;
 	private ArrayList<CarroDto> listado_carros;
-	private ArrayList<String> listado_marcas;
+	private ArrayList<MarcaDto> listado_marcas;
 	public CarroBean() {
 	}
 
 	
 	@PostConstruct
 	public void init() {
-		
+
 	}
 
 
@@ -43,7 +47,7 @@ public class CarroBean {
 	public ArrayList<CarroDto> getListado_carros() {
 		return listado_carros;
 	}
-	public ArrayList<String> getListado_marcas() {
+	public ArrayList<MarcaDto> getListado_marcas() {
 		return listado_marcas;
 	}
 	public void setCarro(CarroDto carro) {
@@ -55,7 +59,7 @@ public class CarroBean {
 	public void setListado_carros(ArrayList<CarroDto> listado_carros) {
 		this.listado_carros = listado_carros;
 	}
-	public void setListado_marcas(ArrayList<String> listado_marcas) {
+	public void setListado_marcas(ArrayList<MarcaDto> listado_marcas) {
 		this.listado_marcas = listado_marcas;
 	}
 	// Implementaciones

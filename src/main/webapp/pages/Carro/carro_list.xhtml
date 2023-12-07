@@ -2,7 +2,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://java.sun.com/jsf/html ">
 
 <ui:composition template="/pages/template/layout.xhtml">
     <ui:define name="title">
@@ -19,14 +20,14 @@
                                 update=":form:Carro-content"
                                 oncomplete="PF('CarroDialog').show()"
                                 styleClass="ui-button-success" style="margin-right: .5rem">
-                            <p:resetInput target=":form:Carro-content" />
+                            <p:resetInput target=":form:Carro-content"/>
                         </p:commandButton>
 
                         <p:toolbarGroup align="right">
                             <p:commandButton
                                     value="Export" icon="pi pi-upload"
                                     styleClass="ui-button-help" ajax="false">
-                                <p:dataExporter type="pdf" target="dt-carros" fileName="carros" />
+                                <p:dataExporter type="pdf" target="dt-carros" fileName="carros"/>
                             </p:commandButton>
                         </p:toolbarGroup>
 
@@ -35,22 +36,24 @@
                                      rows="10" paginatorPosition="bottom">
                             <f:facet name="header">
                                 <div class="products-table-header">
-                                    <span style="font-weight: bold">Usuarios</span> <span
+                                    <span style="font-weight: bold" value="#{msgs.message_carro_listado}"></span> <span
                                         class="filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
-                                      <p:inputText id="globalFilter" onkeyup="PF('dtCarro').filter()" placeholder="Buscar" />
+                                      <p:inputText id="globalFilter" onkeyup="PF('dtCarro').filter()"
+                                                   placeholder="#{msgs.buscar}"/>
 							        </span>
                                 </div>
                             </f:facet>
 
-                            <p:column headerText="Marca" sortBy="#{carro.marca}" filterBy="#{carro.marca}">
-                                <h:outputText value="#{carro.marca}" />
-                            </p:column>
-                            <p:column headerText="Placa" sortBy="#{carro.placa}"
+                            <p:column headerText="#{msgs.message_marcas}" sortBy="#{carro.marca}"
                                       filterBy="#{carro.marca}">
-                                <h:outputText value="#{carro.placa}" />
+                                <h:outputText value="#{carro.marca}"/>
                             </p:column>
-                            <p:column headerText="Flotilla" sortBy="#{carro.flotilla}">
-                                <h:outputText value="#{carro.flotilla}" />
+                            <p:column headerText="#{msgs.message_placa}" sortBy="#{carro.placa}"
+                                      filterBy="#{carro.marca}">
+                                <h:outputText value="#{carro.placa}"/>
+                            </p:column>
+                            <p:column headerText="#{msgs.message_flotilla}" sortBy="#{carro.flotilla}">
+                                <h:outputText value="#{carro.flotilla}"/>
                             </p:column>
 
                             <p:column exportable="false">
@@ -60,15 +63,16 @@
                                                  styleClass="edit-button rounded-button ui-button-success"
                                                  process="@this">
                                     <f:setPropertyActionListener value="#{carro}"
-                                                                 target="#{CarroBean.carro_select}" />
-                                    <p:resetInput target=":form:Conten-content" />
+                                                                 target="#{CarroBean.carro_select}"/>
+                                    <p:resetInput target=":form:Conten-content"/>
                                 </p:commandButton>
                                 <p:commandButton class="ui-button-warning rounded-button"
                                                  icon="pi pi-trash" process="@this"
-                                                 action="#{CarroBean.deleteCarro}" >
+                                                 action="#{CarroBean.deleteCarro}">
                                     <f:setPropertyActionListener value="#{carro}"
-                                                                 target="#{CarroBean.carro_select}" />
-                                    <p:confirm header="Confirmar" message="Está seguro de eliminar el carro?" icon="pi pi-exclamation-triangle"/>
+                                                                 target="#{CarroBean.carro_select}"/>
+                                    <p:confirm header="Confirmar" message="Está seguro de eliminar el carro?"
+                                               icon="pi pi-exclamation-triangle"/>
                                 </p:commandButton>
                             </p:column>
                         </p:dataTable>
@@ -80,10 +84,10 @@
                         su uso es bien sencillo, cada confirmDialog va atado a un p:confirm que es el que se definie dentro del button -->
                         <p:confirmDialog global="true" showEffect="fade" width="300">
                             <p:commandButton value="Si" type="button"
-                                             styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                             styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
                             <p:commandButton value="No" type="button"
                                              styleClass="ui-confirmdialog-no ui-button-secondary"
-                                             icon="pi pi-times" />
+                                             icon="pi pi-times"/>
                         </p:confirmDialog>
                     </p:toolbarGroup>
                 </p:toolbar>
