@@ -59,7 +59,7 @@
                                                  action="#{combustibleBean.deleteCombustible()}" >
                                     <f:setPropertyActionListener value="#{combustible}"
                                                                  target="#{combustibleBean.combustibleDto_seleccionado}" />
-                                    <p:confirm header="Confirmar" message="Está seguro de eliminar el carro?" icon="pi pi-exclamation-triangle"/>
+                                    <p:confirm header="Confirmar" message="#{msgs.eliminar_combustible}" icon="pi pi-exclamation-triangle"/>
                                 </p:commandButton>
                             </p:column>
                         </p:dataTable>
