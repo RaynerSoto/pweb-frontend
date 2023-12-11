@@ -46,13 +46,13 @@
                             </p:column>
                             <p:column exportable="false">
                                 <p:commandButton icon="pi pi-pencil" action="#{combustibleBean.openForEdit()}"
-                                                 update=":form:combustible-content"
+                                                 update="form:combustible-content"
                                                  oncomplete="PF('combustibleDialog').show()"
                                                  styleClass="edit-button rounded-button ui-button-success"
                                                  process="@this">
                                     <f:setPropertyActionListener value="#{combustible}"
                                                                  target="#{combustibleBean.combustibleDto_seleccionado}" />
-                                    <p:resetInput target=":form:Conten-content"/>
+                                    <p:resetInput target="form:combustible-content"/>
                                 </p:commandButton>
                                 <p:commandButton class="ui-button-warning rounded-button"
                                                  icon="pi pi-trash" process="@this"

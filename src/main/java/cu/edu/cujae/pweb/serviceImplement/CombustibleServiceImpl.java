@@ -1,11 +1,9 @@
 package cu.edu.cujae.pweb.serviceImplement;
 
 import cu.edu.cujae.pweb.dto.CombustibleDto;
-import cu.edu.cujae.pweb.dto.UserDto;
 import cu.edu.cujae.pweb.service.CombustibleService;
 import cu.edu.cujae.pweb.util.ResponseReciboUtil;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
-import cu.edu.cujae.pweb.utils.Respuesta_Enum;
 import cu.edu.cujae.pweb.utils.RestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,7 +11,9 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriTemplate;
 
+import javax.faces.model.SelectItem;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CombustibleServiceImpl implements CombustibleService {
@@ -30,25 +30,25 @@ public class CombustibleServiceImpl implements CombustibleService {
     }
 
     @Override
-    public Exception modificar_combustible(CombustibleDto combustibleDto){
-        return null;
+    public ResponseReciboUtil modificar_combustible(CombustibleDto combustibleDto) throws Exception{
+        ResponseReciboUtil responseReciboUtil = new ResponseReciboUtil();
+        ApiRestMapper<ResponseReciboUtil> apiRestMapper = new ApiRestMapper<>();
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        String respuesta = (String) restService.PUT("/api/v1/combustibles/",params,combustibleDto, String.class).getBody();
+        responseReciboUtil = apiRestMapper.mapOne(respuesta,ResponseReciboUtil.class);
+        return responseReciboUtil;
     }
 
     @Override
-    public ResponseReciboUtil eliminar_combustible(CombustibleDto combustibleDto){
+    public ResponseReciboUtil eliminar_combustible(CombustibleDto combustibleDto) throws Exception{
         ResponseReciboUtil responseReciboUtil = new ResponseReciboUtil();
-        try {
-            ApiRestMapper<ResponseReciboUtil> apiRestMapper = new ApiRestMapper<>();
-            MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-            UriTemplate template = new UriTemplate("/api/v1/combustibles/{id}");
-            String uri = template.expand(combustibleDto.getId()).toString();
-            String respuesta = (String) restService.DELETE(uri, params, String.class, null).getBody();
-            responseReciboUtil = apiRestMapper.mapOne(respuesta, ResponseReciboUtil.class);
-            return responseReciboUtil;
-        }catch (Exception e){
-            responseReciboUtil = new ResponseReciboUtil(Respuesta_Enum.Mala,e.getMessage());
-            return responseReciboUtil;
-        }
+        ApiRestMapper<ResponseReciboUtil> apiRestMapper = new ApiRestMapper<>();
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        UriTemplate template = new UriTemplate("/api/v1/combustibles/{id}");
+        String uri = template.expand(combustibleDto.getId()).toString();
+        String respuesta = (String) restService.DELETE(uri, params, String.class, null).getBody();
+        responseReciboUtil = apiRestMapper.mapOne(respuesta, ResponseReciboUtil.class);
+        return responseReciboUtil;
     }
 
     @Override
@@ -59,6 +59,29 @@ public class CombustibleServiceImpl implements CombustibleService {
         String respuesta = (String) restService.GET("/api/v1/combustibles/",params,String.class).getBody();
         listado_combustibles = (ArrayList<CombustibleDto>) apiRestMapper.mapList(respuesta,CombustibleDto.class);
         return listado_combustibles;
+    }
+
+    @Override
+    public ArrayList<String> listado_combustibles_nombre() throws Exception {
+        ArrayList<String> listado_combustibles = new ArrayList<>();
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        ApiRestMapper<String> apiRestMapper = new ApiRestMapper<>();
+        String respuesta = (String) restService.GET("/api/v1/combustibles/nombres",params,String.class).getBody();
+        listado_combustibles = (ArrayList<String>) apiRestMapper.mapList(respuesta,String.class);
+        return listado_combustibles;
+    }
+
+    public List<SelectItem> listado_item() throws Exception{
+        List<SelectItem> listado_items = new ArrayList<SelectItem>();
+        try {
+            List<String> listado_nombre = listado_combustibles_nombre();
+            for (int contador = 0; contador < listado_nombre.size() ; contador++){
+                listado_items.add(new SelectItem(listado_combustibles_nombre().get(contador)));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return listado_items;
     }
 
     @Override

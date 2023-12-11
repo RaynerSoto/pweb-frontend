@@ -2,25 +2,36 @@ package cu.edu.cujae.pweb.serviceImplement;
 
 import cu.edu.cujae.pweb.dto.MarcaDto;
 import cu.edu.cujae.pweb.service.MarcaService;
+import cu.edu.cujae.pweb.util.ResponseReciboUtil;
+import cu.edu.cujae.pweb.utils.ApiRestMapper;
+import cu.edu.cujae.pweb.utils.RestService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
 public class MarcaServiceImpl implements MarcaService {
 
-    @Override
-    public void inserta_marca(MarcaDto marcaDto) throws Exception {
+    @Autowired
+    private RestService restService;
 
+    @Override
+    public ResponseReciboUtil inserta_marca(MarcaDto marcaDto) throws Exception {
+        ResponseReciboUtil responseReciboUtil = new ResponseReciboUtil();
+        ApiRestMapper<ResponseReciboUtil> apiRestMapper = new ApiRestMapper<>();
+        String respuesta = (String) restService.POST("/api/v1/combustibles/",marcaDto,String.class).getBody();
+        responseReciboUtil = apiRestMapper.mapOne(respuesta, ResponseReciboUtil.class);
+        return responseReciboUtil;
     }
 
     @Override
-    public void modificar_marca(MarcaDto marcaDto) throws Exception {
-
+    public ResponseReciboUtil modificar_marca(MarcaDto marcaDto) throws Exception {
+        return null;
     }
 
     @Override
-    public void eliminar_marca(Long id) throws Exception {
-
+    public ResponseReciboUtil eliminar_marca(Long id) throws Exception {
+        return null;
     }
 
     @Override
