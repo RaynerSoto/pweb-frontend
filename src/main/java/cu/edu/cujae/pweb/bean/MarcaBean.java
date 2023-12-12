@@ -1,11 +1,16 @@
 package cu.edu.cujae.pweb.bean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.model.SelectItem;
 
+import cu.edu.cujae.pweb.service.CombustibleService;
+import cu.edu.cujae.pweb.service.MarcaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import cu.edu.cujae.pweb.dto.MarcaDto;
@@ -14,28 +19,67 @@ import cu.edu.cujae.pweb.dto.MarcaDto;
 @ManagedBean
 @ViewScoped
 public class MarcaBean {
-	
-	private MarcaDto marca;
-	
+	@Autowired
+	private CombustibleService combustibleService;
+	@Autowired
+	private MarcaService marcaService;
+
 	private ArrayList<MarcaDto> listado_marcas = new ArrayList<MarcaDto>();
+	private boolean nuevo;
+	private MarcaDto marca;
+	private List<String> listado_combustibles;
+
+	public CombustibleService getCombustibleService() {
+		return combustibleService;
+	}
+
+	public List<String> getListado_combustibles() {
+		return listado_combustibles;
+	}
+
+	public void setListado_combustibles2(List<String> listado_combustibles) {
+		this.listado_combustibles = listado_combustibles;
+	}
+
+	public void setCombustibleService(CombustibleService combustibleService) {
+		this.combustibleService = combustibleService;
+	}
+
+	public MarcaService getMarcaService() {
+		return marcaService;
+	}
+
+	public void setMarcaService(MarcaService marcaService) {
+		this.marcaService = marcaService;
+	}
+
+	public boolean isEstado() {
+		return nuevo;
+	}
+
+	public void setEstado(boolean estado) {
+		this.nuevo = estado;
+	}
+
 	
 	private MarcaDto marca_actual;
 	
 	
-	public MarcaBean() {}
+	public MarcaBean() {
+	}
 	
 	@PostConstruct
 	public void init() {
 		listado_marcas = new ArrayList<MarcaDto>();
 		MarcaDto marca = new MarcaDto(1,"BMW",34,"Gasolina",10);
 		listado_marcas.add(marca);
-	}
-	
-	//Cargando todos los combustibles en String
-	public ArrayList<String> listado_combustible() {
-		return new ArrayList<String>();
-	}
-	
+        try {
+            listado_combustibles = combustibleService.listado_combustibles_nombre();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 	public ArrayList<MarcaDto> getListado_marcas() {
 		return listado_marcas;
 	}
@@ -63,15 +107,22 @@ public class MarcaBean {
 	//Comienzo de las implementaciones
 	//Crear nuevo
 	public void openNew() {
+		this.nuevo = true;
 		this.marca_actual = new MarcaDto();
 	}
 	//Modificar
 	public void openForEdit() {
-		
+		this.nuevo = false;
 	}
 	//Salvar
 	public void salveMarca() {
-		
+		if (nuevo == true){
+			try {
+
+			}catch (Exception e){
+
+			}
+		}
 	}
 	//Eliminar
 	public void deleteMarca() {

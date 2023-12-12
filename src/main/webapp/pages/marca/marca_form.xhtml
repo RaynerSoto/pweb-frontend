@@ -19,8 +19,10 @@
 						<div class="p-field">
 							<p:outputLabel for="@next" value="#{msgs.message_insertar_combustible}"></p:outputLabel>
 							<p:selectOneMenu id="combustible" required="true"
-								value="#{marcaBean.marca_actual.nombre}">
-								<f:selectItem value="#{MarcaBean.listado_combustible}"/>
+											 value="#{marcaBean.marca_actual.combustible}"
+											 filter="true" filterMatchMode="startsWith"
+											 effect="fade">
+								<f:selectItems value="#{marcaBean.listado_combustibles}"/>
 							</p:selectOneMenu>
 							<p:message for="@previous"></p:message>
 						</div>
