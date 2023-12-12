@@ -19,7 +19,7 @@ public class MarcaServiceImpl implements MarcaService {
     public ResponseReciboUtil inserta_marca(MarcaDto marcaDto) throws Exception {
         ResponseReciboUtil responseReciboUtil = new ResponseReciboUtil();
         ApiRestMapper<ResponseReciboUtil> apiRestMapper = new ApiRestMapper<>();
-        String respuesta = (String) restService.POST("/api/v1/combustibles/",marcaDto,String.class).getBody();
+        String respuesta = (String) restService.POST("/api/v1/marcas/",marcaDto,String.class).getBody();
         responseReciboUtil = apiRestMapper.mapOne(respuesta, ResponseReciboUtil.class);
         return responseReciboUtil;
     }
