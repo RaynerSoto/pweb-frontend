@@ -10,6 +10,7 @@ import javax.faces.model.SelectItem;
 
 import cu.edu.cujae.pweb.service.CombustibleService;
 import cu.edu.cujae.pweb.service.MarcaService;
+import cu.edu.cujae.pweb.util.ResponseReciboUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -71,9 +72,8 @@ public class MarcaBean {
 	@PostConstruct
 	public void init() {
 		listado_marcas = new ArrayList<MarcaDto>();
-		MarcaDto marca = new MarcaDto(1,"BMW",34,"Gasolina",10);
-		listado_marcas.add(marca);
         try {
+			listado_marcas = marcaService.listado_marcas();
             listado_combustibles = combustibleService.listado_combustibles_nombre();
         } catch (Exception e) {
             e.printStackTrace();
@@ -118,9 +118,17 @@ public class MarcaBean {
 	public void salveMarca() {
 		if (nuevo == true){
 			try {
+				ResponseReciboUtil responseReciboUtil = marcaService.inserta_marca(this.marca_actual);
 
 			}catch (Exception e){
+				e.printStackTrace();
+			}
+		}
+		else{
+			try {
 
+			}catch (Exception e){
+				e.printStackTrace();
 			}
 		}
 	}
