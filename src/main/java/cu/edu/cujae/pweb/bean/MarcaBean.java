@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.model.SelectItem;
@@ -11,6 +12,9 @@ import javax.faces.model.SelectItem;
 import cu.edu.cujae.pweb.service.CombustibleService;
 import cu.edu.cujae.pweb.service.MarcaService;
 import cu.edu.cujae.pweb.util.ResponseReciboUtil;
+import cu.edu.cujae.pweb.utils.JsfUtils;
+import cu.edu.cujae.pweb.utils.Respuesta_Enum;
+import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -62,25 +66,30 @@ public class MarcaBean {
 		this.nuevo = estado;
 	}
 
-	
+
 	private MarcaDto marca_actual;
-	
-	
+
+
 	public MarcaBean() {
 	}
-	
+
 	@PostConstruct
 	public void init() {
 		listado_marcas = new ArrayList<MarcaDto>();
-        try {
+		try {
 			listado_marcas = marcaService.listado_marcas();
-            listado_combustibles = combustibleService.listado_combustibles_nombre();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+			listado_combustibles = combustibleService.listado_combustibles_nombre();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public ArrayList<MarcaDto> getListado_marcas() {
+		try {
+			listado_marcas = marcaService.listado_marcas();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return listado_marcas;
 	}
 
@@ -103,37 +112,60 @@ public class MarcaBean {
 	public void setMarca(MarcaDto marca) {
 		this.marca = marca;
 	}
-	
+
 	//Comienzo de las implementaciones
 	//Crear nuevo
 	public void openNew() {
 		this.nuevo = true;
 		this.marca_actual = new MarcaDto();
 	}
+
 	//Modificar
 	public void openForEdit() {
 		this.nuevo = false;
 	}
+
 	//Salvar
 	public void salveMarca() {
-		if (nuevo == true){
+		if (nuevo == true) {
 			try {
 				ResponseReciboUtil responseReciboUtil = marcaService.inserta_marca(this.marca_actual);
-
-			}catch (Exception e){
-				e.printStackTrace();
+				if (responseReciboUtil.comparar_enum(Respuesta_Enum.Buena)) {
+					JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "marca_insertar_correcta");
+					PrimeFaces.current().executeScript("PF('marcaDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
+					PrimeFaces.current().ajax().update("form:dt-marcas");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+				} else {
+					JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "error_operation");
+					PrimeFaces.current().executeScript("PF('combustibleDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
+				}
+			} catch (Exception e) {
+				JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "error_operation");
 			}
-		}
-		else{
+		} else {
 			try {
 
-			}catch (Exception e){
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 	}
+
 	//Eliminar
 	public void deleteMarca() {
-		
+		try {
+			ResponseReciboUtil responseReciboUtil = marcaService.eliminar_marca(this.marca_actual);
+			if (responseReciboUtil.comparar_enum(Respuesta_Enum.Buena)) {
+				JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "marca_eliminada");
+				PrimeFaces.current().executeScript("PF('marcaDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
+				PrimeFaces.current().ajax().update("form:dt-marcas");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+			} else {
+				JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "marca_no_eliminada");
+				PrimeFaces.current().executeScript("PF('marcaDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
+				PrimeFaces.current().ajax().update("form:dt-marcas");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "error_operation");
+		}
 	}
 }

@@ -39,7 +39,9 @@ public class CombustibleBean {
 
     public ArrayList<CombustibleDto> getListado_combustibles() {
         try {
-            listado_combustibles = combustibleService.listado_combustibles();
+            if (listado_combustibles.size() != combustibleService.listado_combustibles().size()){
+                listado_combustibles = combustibleService.listado_combustibles();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -64,7 +66,7 @@ public class CombustibleBean {
     public void init() {
         listado_combustibles = new ArrayList<>();
         try{
-            //listado_combustibles = combustibleService.listado_combustibles();
+            listado_combustibles = combustibleService.listado_combustibles();
         }catch (Exception e){
             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "cargar_mala");
             e.printStackTrace();

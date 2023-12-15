@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.util.UriTemplate;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -31,12 +32,24 @@ public class MarcaServiceImpl implements MarcaService {
 
     @Override
     public ResponseReciboUtil modificar_marca(MarcaDto marcaDto) throws Exception {
-        return null;
+        ResponseReciboUtil responseReciboUtil = new ResponseReciboUtil();
+        ApiRestMapper<ResponseReciboUtil> apiRestMapper = new ApiRestMapper<>();
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        String respuesta = (String) restService.PUT("/api/v1/marcas/",params,marcaDto, String.class).getBody();
+        responseReciboUtil = apiRestMapper.mapOne(respuesta,ResponseReciboUtil.class);
+        return responseReciboUtil;
     }
 
     @Override
-    public ResponseReciboUtil eliminar_marca(Long id) throws Exception {
-        return null;
+    public ResponseReciboUtil eliminar_marca(MarcaDto marcaDto) throws Exception {
+        ResponseReciboUtil responseReciboUtil = new ResponseReciboUtil();
+        ApiRestMapper<ResponseReciboUtil> apiRestMapper = new ApiRestMapper<>();
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        UriTemplate template = new UriTemplate("/api/v1/marcas/{id}");
+        String uri = template.expand(marcaDto.getIdentificador()).toString();
+        String respuesta = (String) restService.DELETE(uri, params, String.class, null).getBody();
+        responseReciboUtil = apiRestMapper.mapOne(respuesta, ResponseReciboUtil.class);
+        return responseReciboUtil;
     }
 
     @Override
