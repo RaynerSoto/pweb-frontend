@@ -32,14 +32,18 @@ public class MarcaBean {
 	private ArrayList<MarcaDto> listado_marcas = new ArrayList<MarcaDto>();
 	private boolean nuevo;
 	private MarcaDto marca;
-	private List<String> listado_combustibles;
-
-	public CombustibleService getCombustibleService() {
-		return combustibleService;
-	}
+	private List<String> listado_combustibles = new ArrayList<>();
 
 	public List<String> getListado_combustibles() {
-		return listado_combustibles;
+		try {
+			if (listado_combustibles.size() != combustibleService.listado_combustibles_nombre().size()){
+				this.listado_combustibles = combustibleService.listado_combustibles_nombre();
+			}
+			return listado_combustibles;
+		}catch (Exception e){
+			e.printStackTrace();
+			return listado_combustibles;
+		}
 	}
 
 	public void setListado_combustibles2(List<String> listado_combustibles) {
@@ -73,20 +77,12 @@ public class MarcaBean {
 	public MarcaBean() {
 	}
 
-	@PostConstruct
-	public void init() {
-		listado_marcas = new ArrayList<MarcaDto>();
-		try {
-			listado_marcas = marcaService.listado_marcas();
-			listado_combustibles = combustibleService.listado_combustibles_nombre();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	public ArrayList<MarcaDto> getListado_marcas() {
 		try {
-			listado_marcas = marcaService.listado_marcas();
+			if(listado_marcas.size() != marcaService.listado_marcas().size()){
+				listado_marcas = marcaService.listado_marcas();
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -143,9 +139,17 @@ public class MarcaBean {
 			}
 		} else {
 			try {
-
+				ResponseReciboUtil responseReciboUtil = marcaService.modificar_marca(this.marca_actual);
+				if (responseReciboUtil.comparar_enum(Respuesta_Enum.Buena)) {
+					JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "marca_modificada_correcto");
+					PrimeFaces.current().executeScript("PF('marcaDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
+					PrimeFaces.current().ajax().update("form:dt-marcas");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
+				} else {
+					JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "marca_modificada_fallida");
+					PrimeFaces.current().executeScript("PF('combustibleDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
+				}
 			} catch (Exception e) {
-				e.printStackTrace();
+				JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "error_operation");
 			}
 		}
 	}

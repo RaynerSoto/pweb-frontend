@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -26,7 +25,7 @@ public class CombustibleBean {
     private CombustibleService combustibleService;
     private boolean estado ;
     private CombustibleDto combustibleDto;
-    private ArrayList<CombustibleDto>listado_combustibles;
+    private ArrayList<CombustibleDto>listado_combustibles = new ArrayList<>();
     private CombustibleDto combustibleDto_seleccionado;
 
     public CombustibleDto getCombustibleDto() {
@@ -58,19 +57,6 @@ public class CombustibleBean {
 
     public void setCombustibleDto_seleccionado(CombustibleDto combustibleDto_seleccionado) {
         this.combustibleDto_seleccionado = combustibleDto_seleccionado;
-    }
-
-    //Esta anotacioon permite que se ejecute code luego de haberse ejecuta el constructor de la clase.
-    @PostConstruct
-    @PreDestroy
-    public void init() {
-        listado_combustibles = new ArrayList<>();
-        try{
-            listado_combustibles = combustibleService.listado_combustibles();
-        }catch (Exception e){
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "cargar_mala");
-            e.printStackTrace();
-        }
     }
 
     //Se ejecuta al dar clic en el button Nuevo//siempre asi crea el boton

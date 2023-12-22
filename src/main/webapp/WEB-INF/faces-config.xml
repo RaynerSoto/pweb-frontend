@@ -38,5 +38,11 @@
 			<var>msgs</var>
 		</resource-bundle>
 	</application>
+
+	<managed-bean>
+		<managed-bean-name>combustibleBean</managed-bean-name>
+		<managed-bean-class>cu.edu.cujae.pweb.bean.CombustibleBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
 	
 </faces-config>
