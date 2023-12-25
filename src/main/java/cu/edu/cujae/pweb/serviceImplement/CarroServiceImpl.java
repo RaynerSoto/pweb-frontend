@@ -2,10 +2,14 @@ package cu.edu.cujae.pweb.serviceImplement;
 
 import cu.edu.cujae.pweb.dto.CarroDto;
 import cu.edu.cujae.pweb.service.CarroService;
+import cu.edu.cujae.pweb.utils.ApiRestMapper;
 import cu.edu.cujae.pweb.utils.RestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -31,8 +35,13 @@ public class CarroServiceImpl implements CarroService {
     }
 
     @Override
-    public ArrayList<CarroDto> listado_carros() throws SQLException {
-        return null;
+    public ArrayList<CarroDto> listado_carros() throws SQLException, IOException {
+        ArrayList<CarroDto> listado_carros = new ArrayList<CarroDto>();
+        MultiValueMap<String ,String> params = new LinkedMultiValueMap<>();
+        ApiRestMapper<CarroDto> apiRestMapper = new ApiRestMapper<>();
+        String respuesta = (String) restService.GET("/api/v1/carros/",params,String.class).getBody();
+        listado_carros = (ArrayList<CarroDto>) apiRestMapper.mapList(respuesta,CarroDto.class);
+        return listado_carros;
     }
 
 }

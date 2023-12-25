@@ -32,7 +32,7 @@
                         </p:toolbarGroup>
 
                         <p:dataTable id="dt-carro" widgetVar="dtCarro" var="carro"
-                                     value="#{CarroBean.listado_carros}" reflow="true" paginator="true"
+                                     value="#{carroBean.listado_carros}" reflow="true" paginator="true"
                                      rows="10" paginatorPosition="bottom">
                             <f:facet name="header">
                                 <div class="products-table-header">
@@ -44,9 +44,9 @@
                                 </div>
                             </f:facet>
 
-                            <p:column headerText="#{msgs.message_marcas}" sortBy="#{carro.marca}"
-                                      filterBy="#{carro.marca}">
-                                <h:outputText value="#{carro.marca}"/>
+                            <p:column headerText="#{msgs.message_marcas}" sortBy="#{CarroDto.marca}"
+                                      filterBy="#{CarroDto.marca}">
+                                <h:outputText value="#{CarroDto.marca}"/>
                             </p:column>
                             <p:column headerText="#{msgs.message_placa}" sortBy="#{carro.placa}"
                                       filterBy="#{carro.marca}">

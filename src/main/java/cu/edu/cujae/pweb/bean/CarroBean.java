@@ -9,8 +9,8 @@ import javax.faces.bean.ViewScoped;
 
 import cu.edu.cujae.pweb.dto.MarcaDto;
 import cu.edu.cujae.pweb.service.CarroService;
+import cu.edu.cujae.pweb.service.MarcaService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
-import org.primefaces.PrimeFaces;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +24,10 @@ public class CarroBean {
 	@Autowired
 	private CarroService carroService;
 
+	@Autowired
+	private MarcaService marcaService;
 	private CarroDto carro;
+
 	private CarroDto carro_select;
 	private ArrayList<CarroDto> listado_carros;
 	private ArrayList<MarcaDto> listado_marcas;
@@ -33,8 +36,14 @@ public class CarroBean {
 
 	
 	@PostConstruct
-	public void init() {
-
+	public void init() throws Exception {
+		listado_carros = new ArrayList<CarroDto>();
+		try{
+			listado_carros = carroService.listado_carros();
+		}catch (Exception e){
+			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "cargar_mala");
+			e.printStackTrace();
+		}
 	}
 
 
