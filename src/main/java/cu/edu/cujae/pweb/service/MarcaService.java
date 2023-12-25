@@ -11,7 +11,7 @@ import cu.edu.cujae.pweb.util.ResponseReciboUtil;
 public interface MarcaService {
     public ResponseReciboUtil inserta_marca(MarcaDto marcaDto) throws Exception;
     public ResponseReciboUtil modificar_marca(MarcaDto marcaDto)throws Exception;
-    public ResponseReciboUtil eliminar_marca(Long id)throws Exception;
+    public ResponseReciboUtil eliminar_marca(MarcaDto marcaDto) throws Exception ;
     public ArrayList<MarcaDto> listado_marcas()throws Exception;
     public MarcaDto obtener_marca(long id)throws Exception;
 }
