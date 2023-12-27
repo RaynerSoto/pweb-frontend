@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.util.UriTemplate;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -20,17 +21,21 @@ public class CarroServiceImpl implements CarroService {
 
     @Override
     public void insertar_datos(CarroDto car) throws SQLException {
-        restService.POST("/api/v1/carros",car,String.class).getBody();
-
+        restService.POST("/api/v1/carros/",car,String.class).getBody();
     }
 
     @Override
-    public void modificar_datos(CarroDto car, long id) throws SQLException {
-
+    public void modificar_datos(CarroDto car) throws SQLException {
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        restService.PUT("/api/v1/carros/",params,car, String.class).getBody();
     }
 
     @Override
     public void eliminar_datos(long id) throws SQLException {
+        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+        UriTemplate template = new UriTemplate("/api/v1/carros/{id}");
+        String uri = template.expand(id).toString();
+        restService.DELETE(uri, params, String.class, null).getBody();
 
     }
 
