@@ -11,20 +11,17 @@
                 <p:panelGrid layout="grid" columns="2">
                     <h:panelGroup>
                         <div class="p-field">
-                            <p:outputLabel for="@next">Marca</p:outputLabel>
-                            <p:selectOneMenu id="marca" required="true"
-                                             value="#{carroBean.carro_select.id_marca}">
-                                <f:selectItem value="#{carroBean.listado_marcas}"/>
-                            </p:selectOneMenu>
-                            <p:message for="@previous" ></p:message>
+                            <p:outputLabel for="@next" value="#{msgs.message_marcas_nombre}"></p:outputLabel>
+                            <p:inputText id="marca" required="true" value="#{carroBean.carro_select.id_marca}" />
+                            <p:message for="@previous"></p:message>
                         </div>
                         <div class="p-field">
-                            <p:outputLabel for="@next">Placa</p:outputLabel>
+                            <p:outputLabel for="@next" value="#{msgs.message_placa}"></p:outputLabel>
                             <p:inputText id="placa" required="true" value="#{carroBean.carro_select.placa}" />
                             <p:message for="@previous"></p:message>
                         </div>
                         <div class="p-field">
-                            <p:outputLabel for="@next">Flotilla</p:outputLabel>
+                            <p:outputLabel for="@next" value="#{msgs.message_flotilla}"></p:outputLabel>
                             <p:inputText id="flotilla" required="true" value="#{carroBean.carro_select.flotilla}" maxlength="11">
                                 <p:keyFilter mask="num" />
                             </p:inputText>
@@ -36,8 +33,8 @@
         </p:outputPanel>
 
         <f:facet name="footer">
-            <p:commandButton value="Salvar" icon="pi pi-check" actionListener="#{carroBean.SaveCarro}" update="Carro-content" process="Carro-content @this" />
-            <p:commandButton value="Cancelar" icon="pi pi-times" onclick="PF('CarroDialog').hide()" class="ui-button-secondary" />
+            <p:commandButton value="#{msgs.guardar}" icon="pi pi-check" actionListener="#{carroBean.SaveCarro}" update="Carro-content" process="Carro-content @this" />
+            <p:commandButton value="#{msgs.cancelar}" icon="pi pi-times" onclick="PF('CarroDialog').hide()" class="ui-button-secondary" />
         </f:facet>
 
     </p:dialog>

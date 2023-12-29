@@ -6,12 +6,12 @@ public class CarroDto {
     private long identificador;
     private String marca;
 
-    public CarroDto(String flotilla, String placa, long identificador, String id_marca) {
+    public CarroDto(String flotilla, String placa, long identificador, String marca) {
         super();
         this.flotilla = flotilla;
         this.placa = placa;
         this.identificador = identificador;
-        this.marca = id_marca;
+        this.marca = marca;
     }
 
     public CarroDto() {
