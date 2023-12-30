@@ -23,9 +23,10 @@ import java.util.UUID;
 @ViewScoped //Este es el alcance utilizado para trabajar con Ajax
 public class UsuarioBean {
     private UsuarioDto userDto;
-    private UserDto selectedUser;
-    private List<UserDto> users;
+    private UsuarioDto selectedUser;
+    private List<UsuarioDto> users;
     private List<String> roles;
+    private boolean estado;
 
     /* @Autowired es la manera para inyectar una dependencia/clase anotada con @service en spring
      * Tener en cuenta que lo que se inyecta siempre es la interfaz y no la clase
@@ -51,14 +52,13 @@ public class UsuarioBean {
 
     //Se ejecuta al dar clic en el button Nuevo//siempre asi crea el boton
     public void openNew() {
-        this.selectedUser = new UserDto();
-        this.selectedRoles = null;
+        this.selectedUser = new UsuarioDto();
+        estado = true;
     }
 
     //Se ejecuta al dar clic en el button con el lapicito
     public void openForEdit() {
-        List<RoleDto> roles = this.selectedUser.getRoles();
-        this.selectedRoles = roles.stream().map(r -> r.getId()).toArray(Long[]::new);
+        estado = false;
     }
 
     //Se ejecuta al dar clic en el button dentro del dialog para salvar o registrar al usuario
@@ -91,7 +91,5 @@ public class UsuarioBean {
         }
 
     }
-
-
 
 }
