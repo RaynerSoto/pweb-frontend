@@ -3,13 +3,13 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://java.sun.com/jsf/html ">
+      xsi:schemaLocation="http://java.sun.com/jsf/html">
 
 <ui:composition template="/pages/template/layout.xhtml">
     <ui:define name="title">
-        Listado de Carros
+        Listado de Rutas
     </ui:define>
-    <ui:define name="layout">"src/main/webapp/pages/Carro/carro_list.xhtml"
+    <ui:define name="layout">"src/main/webapp/pages/hojaderuta/hojaderuta_list.xhtml"
         <h:form id="form">
             <f:view locale="#{lenguageBean.locale}">
                 <div class="card crud-demo">
@@ -17,73 +17,76 @@
                         <p:toolbarGroup>
                             <p:commandButton
                                     value="#{msgs.message_insertar_nuevo}" icon="pi pi-plus"
-                                    actionListener="#{carroBean.openNew}"
-                                    update=":form:Carro-content"
-                                    oncomplete="PF('CarroDialog').show()"
+                                    actionListener="#{hojaderutaBean.openNew}"
+                                    update=":form:hojaderuta-content"
+                                    oncomplete="PF('hojaderutaDialog').show()"
                                     styleClass="ui-button-success" style="margin-right: .5rem">
-                                <p:resetInput target=":form:Carro-content"/>
+                                <p:resetInput target=":form:hojaderuta-content"/>
                             </p:commandButton>
 
                             <p:toolbarGroup align="right">
                                 <p:commandButton
                                         value="#{msgs.message_exportar}" icon="pi pi-upload"
                                         styleClass="ui-button-help" ajax="false">
-                                    <p:dataExporter type="pdf" target="dt-carro" fileName="carros"/>
+                                    <p:dataExporter type="pdf" target="dt-hojaderuta" fileName="hojaderuta"/>
                                 </p:commandButton>
                             </p:toolbarGroup>
 
-                            <p:dataTable id="dt-carro" widgetVar="dtCarro" var="carro"
-                                         value="#{carroBean.listado_carros}" reflow="true" paginator="true"
+                            <p:dataTable id="dt-hojaderuta" widgetVar="dthojaderuta" var="hojaderuta"
+                                         value="#{hojaderutaBean.listado_rutas}" reflow="true" paginator="true"
                                          rows="10" paginatorPosition="bottom">
+
                                 <f:facet name="header">
                                     <div class="products-table-header">
-                                        <span style="font-weight: bold" value="#{msgs.message_carro_listado}"></span>
-                                        <span
-                                                class="filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
-                                      <p:inputText id="globalFilter" onkeyup="PF('dtCarro').filter()"
+                                        <span style="font-weight: bold">Listado de Hoja de Ruta</span>
+                                        <span class="filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
+                                      <p:inputText id="globalFilter" onkeyup="PF('dthojaderuta').filter()"
                                                    placeholder="#{msgs.buscar}"/>
 							        </span>
                                     </div>
                                 </f:facet>
 
-                                <p:column headerText="#{msgs.message_marcas_nombre}" sortBy="#{carro.id_marca}"
-                                          filterBy="#{carro.id_marca}">
-                                    <h:outputText value="#{carro.id_marca}"/>
+                                <p:column headerText="#{msgs.message_carro_hoja}" sortBy="#{hojaderuta.id_carro}"
+                                          filterBy="#{hojaderuta.id_carro}">
+                                    <h:outputText value="#{hojaderuta.id_carro}"/>
                                 </p:column>
-                                <p:column headerText="#{msgs.message_placa}" sortBy="#{carro.placa}"
-                                          filterBy="#{carro.id_marca}">
-                                    <h:outputText value="#{carro.placa}"/>
+                                <p:column headerText="#{msgs.message_fecha}" sortBy="#{hojaderuta.fecha}"
+                                          filterBy="#{hojaderuta.fecha}">
+                                    <h:outputText value="#{hojaderuta.fecha}"/>
                                 </p:column>
-                                <p:column headerText="#{msgs.message_flotilla}" sortBy="#{carro.flotilla}">
-                                    <h:outputText value="#{carro.flotilla}"/>
+                                <p:column headerText="#{msgs.message_kms}" sortBy="#{hojaderuta.kms}">
+                                    <h:outputText value="#{hojaderuta.kms}"/>
+                                </p:column>
+                                <p:column headerText="#{msgs.message_CI}" sortBy="#{hojaderuta.ci}">
+                                    <h:outputText value="#{hojaderuta.ci}"/>
                                 </p:column>
 
                                 <p:column exportable="false">
-                                    <p:commandButton icon="pi pi-pencil" action="#{carroBean.openForEdit()}"
-                                                     update=":form:Carro-content"
-                                                     oncomplete="PF('CarroDialog').show()"
+                                    <p:commandButton icon="pi pi-pencil" action="#{hojaderutaBean.openForEdit()}"
+                                                     update=":form:hojaderuta-content"
+                                                     oncomplete="PF('hojaderutaDialog').show()"
                                                      styleClass="edit-button rounded-button ui-button-success"
                                                      process="@this">
-                                        <f:setPropertyActionListener value="#{carro}"
-                                                                     target="#{carroBean.carro_select}"/>
-                                        <p:resetInput target=":form:Carro-content"/>
+                                        <f:setPropertyActionListener value="#{hojaderuta}"
+                                                                     target="#{hojaderutaBean.hojaderuta_select}"/>
+                                        <p:resetInput target=":form:hojaderuta-content"/>
                                     </p:commandButton>
                                     <p:commandButton class="ui-button-warning rounded-button"
                                                      icon="pi pi-trash" process="@this"
-                                                     action="#{carroBean.deleteCarro}">
-                                        <f:setPropertyActionListener value="#{carro}"
-                                                                     target="#{carroBean.carro_select}"/>
-                                        <p:confirm header="#{msgs.confirmar}" message="#{msgs.eliminar_carro}"
+                                                     action="#{hojaderutaBean.deleteRuta}">
+                                        <f:setPropertyActionListener value="#{hojaderuta}"
+                                                                     target="#{hojaderutaBean.hojaderuta_select}"/>
+                                        <p:confirm header="#{msgs.confirmar}" message="#{msgs.eliminar_ruta}"
                                                    icon="pi pi-exclamation-triangle"/>
                                     </p:commandButton>
                                 </p:column>
                             </p:dataTable>
 
                             <!-- ui:include es una etiqueta de facelet que permite incluir pages y de esta forma el code no se carga tanto -->
-                            <ui:include src="carro_form.xhtml"></ui:include>
+                            <ui:include src="hojaderuta_form.xhtml"></ui:include>
 
                             <!-- Este comoponente se utiliza mucho para el caso de los eliminar, que es donde casi siempre se necesita confirmation,
-                            su uso es bien sencillo, cada confirmDialog va atado a un p:confirm que es el que se definie dentro del button -->
+                           su uso es bien sencillo, cada confirmDialog va atado a un p:confirm que es el que se definie dentro del button -->
                             <p:confirmDialog global="true" showEffect="fade" width="300">
                                 <p:commandButton value="#{msgs.message_yes}" type="button"
                                                  styleClass="ui-confirmdialog-yes" icon="pi pi-check"/>
@@ -95,7 +98,10 @@
                     </p:toolbar>
                 </div>
             </f:view>
+
         </h:form>
     </ui:define>
+
 </ui:composition>
+
 </html>

@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog header="Hoja de Ruta" showEffect="fade" modal="true"
+              widgetVar="hojaderutaDialog" responsive="true">
+        <p:outputPanel id="hojaderuta-content" class="ui-fluid">
+            <p:outputPanel rendered="#{not empty hojaderutaBean.hojaderuta_select}">
+                <p:panelGrid layout="grid" columns="2">
+                    <h:panelGroup>
+                        <div class="p-field">
+                            <p:outputLabel for="@next" value="#{msgs.message_carro_hoja}"></p:outputLabel>
+                            <p:inputText id="id_carro" required="true" value="#{hojaderutaBean.hojaderuta_select.id_carro}" />
+                            <p:message for="@previous"></p:message>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="@next" value="#{msgs.message_fecha}"></p:outputLabel>
+                            <p:calendar id="fecha" required="true" value="#{hojaderutaBean.hojaderuta_select.date}" />
+                            <p:message for="@previous"></p:message>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="@next" value="#{msgs.message_kms}"></p:outputLabel>
+                            <p:inputText id="kms" required="true" value="#{hojaderutaBean.hojaderuta_select.kms}" />
+                            <p:message for="@previous"></p:message>
+                        </div>
+                        <div class="p-field">
+                            <p:outputLabel for="@next" value="#{msgs.message_CI}"></p:outputLabel>
+                            <p:inputText id="chofer" required="true" value="#{hojaderutaBean.hojaderuta_select.ci}" />
+                            <p:message for="@previous"></p:message>
+                        </div>
+                    </h:panelGroup>
+                </p:panelGrid>
+            </p:outputPanel>
+        </p:outputPanel>
+
+        <f:facet name="footer">
+            <p:commandButton value="#{msgs.guardar}" icon="pi pi-check" actionListener="#{hojaderutaBean.SaveRuta}" update="hojaderuta-content" process="hojaderuta-content @this"/>
+            <p:commandButton value="#{msgs.cancelar}" icon="pi pi-times" onclick="PF('hojaderutaDialog').hide()" class="ui-button-secondary" />
+        </f:facet>
+    </p:dialog>
+
+
+</ui:composition>
