@@ -17,7 +17,6 @@ public interface CombustibleService {
     public ResponseReciboUtil eliminar_combustible(CombustibleDto combustibleDto) throws Exception;
     public ArrayList<CombustibleDto>listado_combustibles()throws Exception;
     public ArrayList<String>listado_combustibles_nombre() throws Exception;
-    public List<SelectItem> listado_item() throws Exception;
     public CombustibleDto obtener_combustible(long id)throws Exception;
 
 }

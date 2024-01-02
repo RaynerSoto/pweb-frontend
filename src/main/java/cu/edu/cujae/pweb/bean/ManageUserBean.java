@@ -24,16 +24,14 @@ import cu.edu.cujae.pweb.dto.UserDto;
 @ManagedBean
 @ViewScoped //Este es el alcance utilizado para trabajar con Ajax
 public class ManageUserBean {
+	/*
 	private UserDto userDto;
 	private UserDto selectedUser;
 	private List<UserDto> users;
 	private Long[] selectedRoles;
 	
 	private List<RoleDto> roles;
-	
-	/* @Autowired es la manera para inyectar una dependencia/clase anotada con @service en spring
-	 * Tener en cuenta que lo que se inyecta siempre es la interfaz y no la clase
-	 */
+
 	@Autowired
 	private UserService userService;
 	
@@ -50,10 +48,9 @@ public class ManageUserBean {
     public void init() {
 		/*
 	    users = users == null ? userService.getUsers() : users;
-		roles = roleService.getRoles();*/
+		roles = roleService.getRoles();
     }
-	
-	//Se ejecuta al dar clic en el button Nuevo//siempre asi crea el boton
+
 	public void openNew() {
         this.selectedUser = new UserDto();
         this.selectedRoles = null;
@@ -135,4 +132,5 @@ public class ManageUserBean {
 	public void setRoles(List<RoleDto> roles) {
 		this.roles = roles;
 	}
+	*/
 }
