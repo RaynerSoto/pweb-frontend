@@ -1,0 +1,78 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="Usuario" showEffect="fade" modal="true"
+		widgetVar="manageUserDialog" responsive="true">
+		<p:outputPanel id="manage-user-content" class="ui-fluid">
+			<p:outputPanel rendered="#{not empty usuarioBean.selectedUser}">
+				<p:panelGrid layout="grid" columns="2">
+					<h:panelGroup>
+						<div class="p-field">
+							<p:outputLabel for="@next">Nombre Completo</p:outputLabel>
+							<p:inputText id="name" required="true" 
+								value="#{usuarioBean.selectedUser.fullName}" />
+							<p:message for="@previous" ></p:message>
+						</div>
+						<div class="p-field">
+							<p:outputLabel for="@next">Usuario</p:outputLabel>
+							<p:inputText id="username" required="true"
+								value="#{usuarioBean.selectedUser.username}" />
+							<p:message for="@previous"></p:message>
+						</div>
+						<div class="p-field">
+							<p:outputLabel for="@next">Correo</p:outputLabel>
+							<p:inputText id="email" required="true"
+								value="#{usuarioBean.selectedUser.email}"
+								validatorMessage="Email mal formado">
+								<f:validateRegex
+									pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+							</p:inputText>
+							<p:message for="@previous"></p:message>
+						</div>
+					</h:panelGroup>
+					<h:panelGroup>
+					    <div class="p-field">
+							<p:outputLabel for="@next">Roles</p:outputLabel>
+							<p:selectOneMenu id="simple" required="true"
+								value="#{usuarioBean.selectedUser.rol}" label="Seleccione"
+								style="min-width: 15rem" filter="true"
+								filterMatchMode="startsWith" panelStyle="width: 30rem"
+								scrollHeight="250">
+								<f:selectItems value="#{usuarioBean.roles}" var="role"
+									itemLabel="#{role}" itemValue="#{role}" />
+							</p:selectOneMenu>
+						</div>
+						<div class="p-field">
+							<p:outputLabel for="@next" rendered="#{empty usuarioBean.selectedUser.id}">Contraseña</p:outputLabel>
+							<p:password id="password1" required="true"
+								rendered="#{empty usuarioBean.selectedUser.id}"
+								value="#{usuarioBean.selectedUser.password}"
+								match="password2">
+							</p:password>
+							<p:message for="@previous" rendered="#{empty usuarioBean.selectedUser.id}"></p:message>
+						</div>
+						<div class="p-field">
+							<p:outputLabel for="@next" rendered="#{empty usuarioBean.selectedUser.id}">Repetir contraseña</p:outputLabel>
+							<p:password id="password2" required="true"
+								value="#{usuarioBean.selectedUser.password}"
+								rendered="#{empty usuarioBean.selectedUser.id}">
+							</p:password>
+							<p:message for="@previous" rendered="#{empty usuarioBean.selectedUser.id}"></p:message>
+						</div>
+					</h:panelGroup>
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<f:facet name="footer">
+			<p:commandButton value="Salvar" icon="pi pi-check"
+				actionListener="#{usuarioBean.saveUser}"
+				update="manage-user-content" process="manage-user-content @this" />
+			<p:commandButton value="Cancelar" icon="pi pi-times"
+				onclick="PF('manageUserDialog').hide()" class="ui-button-secondary" />
+		</f:facet>
+	</p:dialog>
+</ui:composition>
