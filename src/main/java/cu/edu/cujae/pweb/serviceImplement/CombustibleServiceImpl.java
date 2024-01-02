@@ -67,23 +67,15 @@ public class CombustibleServiceImpl implements CombustibleService {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         ApiRestMapper<String> apiRestMapper = new ApiRestMapper<>();
         String respuesta = (String) restService.GET("/api/v1/combustibles/nombres",params,String.class).getBody();
-        listado_combustibles = (ArrayList<String>) apiRestMapper.mapList(respuesta,String.class);
-        return listado_combustibles;
-    }
-
-    public List<SelectItem> listado_item() throws Exception{
-        List<SelectItem> listado_items = new ArrayList<SelectItem>();
         try {
-            List<String> listado_nombre = listado_combustibles_nombre();
-            for (int contador = 0; contador < listado_nombre.size() ; contador++){
-                listado_items.add(new SelectItem(listado_combustibles_nombre().get(contador)));
-            }
+            listado_combustibles = (ArrayList<String>) apiRestMapper.mapList(respuesta,String.class);
         }catch (Exception e){
             e.printStackTrace();
+            System.out.println(((ResponseReciboUtil) apiRestMapper.mapList(respuesta,String.class)).toString());
+        }finally {
+            return listado_combustibles;
         }
-        return listado_items;
     }
-
 
     @Override
     public CombustibleDto obtener_combustible(long id) throws Exception {

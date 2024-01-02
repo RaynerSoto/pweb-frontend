@@ -33,4 +33,9 @@ public class ResponseReciboUtil {
     public void setMensaje_recibo(String mensaje_recibo) {
         this.mensaje_recibo = mensaje_recibo;
     }
+
+    @Override
+    public String toString(){
+        return "El estado actual del programa es: " + this.respuestaEnum + " a causa de:" + this.mensaje_recibo;
+    }
 }
