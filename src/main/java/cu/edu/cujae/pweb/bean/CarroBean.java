@@ -23,23 +23,26 @@ import cu.edu.cujae.pweb.dto.CarroDto;
 @ManagedBean
 @ViewScoped
 public class CarroBean {
-
+	@Autowired
+	private MarcaService marcaService;
 	@Autowired
 	private CarroService carroService;
 
-	@Autowired
-	private MarcaService marcaService;
+
 	private CarroDto carro;
 	private boolean estado ;
 	private CarroDto carro_select;
 	private ArrayList<CarroDto> listado_carros;
 	private ArrayList<MarcaDto> listado_marcas;
+	private ArrayList<String> listado_nombre_marca;
 	public CarroBean() {
 	}
 
 	
 	@PostConstruct
 	public void init() throws Exception {
+		listado_marcas = new ArrayList<MarcaDto>();
+		listado_nombre_marca = new ArrayList<String>();
 		listado_carros = new ArrayList<CarroDto>();
 		try{
 			listado_carros = carroService.listado_carros();
@@ -62,9 +65,20 @@ public class CarroBean {
 		}
 		return listado_carros;
 	}
-	public ArrayList<MarcaDto> getListado_marcas() {
-		return listado_marcas;
+	public ArrayList<String> getListado_nombre_marca() {
+		try {
+			if(listado_marcas.size() != marcaService.listado_marcas().size()){
+				listado_marcas = marcaService.listado_marcas();
+				for(int i=0; i<listado_marcas.size();i++){
+					listado_nombre_marca.add(listado_marcas.get(i).getNombre());
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listado_nombre_marca;
 	}
+
 	public void setCarro(CarroDto carro) {
 		this.carro = carro;
 	}
@@ -92,7 +106,7 @@ public class CarroBean {
 	}
 	//Salvar
 	public void SaveCarro()throws SQLException {
-		if(this.carro_select.getId_marca().trim().equalsIgnoreCase("")&& this.carro_select.getFlotilla().trim().equalsIgnoreCase("")&&this.carro_select.getPlaca().trim().equalsIgnoreCase("")){
+		if( this.carro_select.getFlotilla().trim().equalsIgnoreCase("")&&this.carro_select.getPlaca().trim().equalsIgnoreCase("")){
 			System.out.println("Esto está vacío");
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "carro_fallo_insertar");
 		}else{
@@ -132,7 +146,5 @@ public class CarroBean {
 		}
 
 	}
-
-
 
 }

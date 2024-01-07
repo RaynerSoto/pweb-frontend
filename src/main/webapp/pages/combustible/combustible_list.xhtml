@@ -9,76 +9,80 @@
     </ui:define>
     <ui:define name="layout">
         <h:form id="form">
-            <div class="card crud-demo">
-                <p:toolbar>
-                    <p:toolbarGroup>
-                        <p:commandButton
-                                value="Nuevo" icon="pi pi-plus"
-                                actionListener="#{combustibleBean.openNew}"
-                                update=":form:combustible-content"
-                                oncomplete="PF('combustibleDialog').show()"
-                                styleClass="ui-button-success" style="margin-right: .5rem">
-                            <p:resetInput target=":form:combustible-content" />
-                        </p:commandButton>
-
-                        <p:toolbarGroup align="right">
+            <f:view locale="#{lenguageBean.locale}">
+                <div class="card crud-demo">
+                    <p:toolbar>
+                        <p:toolbarGroup>
                             <p:commandButton
-                                    value="Export" icon="pi pi-upload"
-                                    styleClass="ui-button-help" ajax="false">
-                                <p:dataExporter type="pdf" target="dt-combustibles" fileName="combustibles" />
+                                    value="Nuevo" icon="pi pi-plus"
+                                    actionListener="#{combustibleBean.openNew}"
+                                    update=":form:combustible-content"
+                                    oncomplete="PF('combustibleDialog').show()"
+                                    styleClass="ui-button-success" style="margin-right: .5rem">
+                                <p:resetInput target=":form:combustible-content" />
                             </p:commandButton>
-                        </p:toolbarGroup>
 
-                        <p:dataTable id="dt-combustibles" widgetVar="dtcombustibles" var="combustible"
-                                     value="#{combustibleBean.listado_combustibles}" reflow="true" paginator="true"
-                                     rows="10" paginatorPosition="bottom">
-                            <f:facet name="header">
-                                <div class="products-table-header">
-                                    <span style="font-weight: bold">Usuarios</span>
-                                    <span class="filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
+                            <p:toolbarGroup align="right">
+                                <p:commandButton
+                                        value="Export" icon="pi pi-upload"
+                                        styleClass="ui-button-help" ajax="false">
+                                    <p:dataExporter type="pdf" target="dt-combustibles" fileName="combustibles" />
+                                </p:commandButton>
+                            </p:toolbarGroup>
+
+                            <p:dataTable id="dt-combustibles" widgetVar="dtcombustibles" var="combustible"
+                                         value="#{combustibleBean.listado_combustibles}" reflow="true" paginator="true"
+                                         rows="10" paginatorPosition="bottom">
+                                <f:facet name="header">
+                                    <div class="products-table-header">
+                                        <span style="font-weight: bold">Usuarios</span>
+                                        <span class="filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
                                       <p:inputText id="globalFilter" onkeyup="PF('dtcombustibles').filter()" placeholder="Buscar" />
 							        </span>
-                                </div>
-                            </f:facet>
+                                    </div>
+                                </f:facet>
 
-                            <p:column headerText="#{msgs.message_insertar_combustible}" sortBy="#{combustible.nombre}" filterBy="#{combustible.nombre}">
-                                <h:outputText value="#{combustible.nombre}" />
-                            </p:column>
-                            <p:column exportable="false">
-                                <p:commandButton icon="pi pi-pencil" action="#{combustibleBean.openForEdit()}"
-                                                 update="form:combustible-content"
-                                                 oncomplete="PF('combustibleDialog').show()"
-                                                 styleClass="edit-button rounded-button ui-button-success"
-                                                 process="@this">
-                                    <f:setPropertyActionListener value="#{combustible}"
-                                                                 target="#{combustibleBean.combustibleDto_seleccionado}" />
-                                    <p:resetInput target="form:combustible-content"/>
-                                </p:commandButton>
-                                <p:commandButton class="ui-button-warning rounded-button"
-                                                 icon="pi pi-trash" process="@this"
-                                                 action="#{combustibleBean.deleteCombustible()}" >
-                                    <f:setPropertyActionListener value="#{combustible}"
-                                                                 target="#{combustibleBean.combustibleDto_seleccionado}" />
-                                    <p:confirm header="Confirmar" message="#{msgs.eliminar_combustible}" icon="pi pi-exclamation-triangle"/>
-                                </p:commandButton>
-                            </p:column>
-                        </p:dataTable>
+                                <p:column headerText="#{msgs.message_insertar_combustible}" sortBy="#{combustible.nombre}" filterBy="#{combustible.nombre}">
+                                    <h:outputText value="#{combustible.nombre}" />
+                                </p:column>
+                                <p:column exportable="false">
+                                    <p:commandButton icon="pi pi-pencil" action="#{combustibleBean.openForEdit()}"
+                                                     update="form:combustible-content"
+                                                     oncomplete="PF('combustibleDialog').show()"
+                                                     styleClass="edit-button rounded-button ui-button-success"
+                                                     process="@this">
+                                        <f:setPropertyActionListener value="#{combustible}"
+                                                                     target="#{combustibleBean.combustibleDto_seleccionado}" />
+                                        <p:resetInput target="form:combustible-content"/>
+                                    </p:commandButton>
+                                    <p:commandButton class="ui-button-warning rounded-button"
+                                                     icon="pi pi-trash" process="@this"
+                                                     action="#{combustibleBean.deleteCombustible()}" >
+                                        <f:setPropertyActionListener value="#{combustible}"
+                                                                     target="#{combustibleBean.combustibleDto_seleccionado}" />
+                                        <p:confirm header="Confirmar" message="#{msgs.eliminar_combustible}" icon="pi pi-exclamation-triangle"/>
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>
 
-                        <!-- ui:include es una etiqueta de facelet que permite incluir pages y de esta forma el code no se carga tanto -->
-                        <ui:include src="combustible_form.xhtml"></ui:include>
+                            <!-- ui:include es una etiqueta de facelet que permite incluir pages y de esta forma el code no se carga tanto -->
+                            <ui:include src="combustible_form.xhtml"></ui:include>
 
-                        <!-- Este comoponente se utiliza mucho para el caso de los eliminar, que es donde casi siempre se necesita confirmation,
-                        su uso es bien sencillo, cada confirmDialog va atado a un p:confirm que es el que se definie dentro del button -->
-                        <p:confirmDialog global="true" showEffect="fade" width="300">
-                            <p:commandButton value="Si" type="button"
-                                             styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
-                            <p:commandButton value="No" type="button"
-                                             styleClass="ui-confirmdialog-no ui-button-secondary"
-                                             icon="pi pi-times" />
-                        </p:confirmDialog>
-                    </p:toolbarGroup>
-                </p:toolbar>
-            </div>
+                            <!-- Este comoponente se utiliza mucho para el caso de los eliminar, que es donde casi siempre se necesita confirmation,
+                            su uso es bien sencillo, cada confirmDialog va atado a un p:confirm que es el que se definie dentro del button -->
+                            <p:confirmDialog global="true" showEffect="fade" width="300">
+                                <p:commandButton value="Si" type="button"
+                                                 styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                <p:commandButton value="No" type="button"
+                                                 styleClass="ui-confirmdialog-no ui-button-secondary"
+                                                 icon="pi pi-times" />
+                            </p:confirmDialog>
+                        </p:toolbarGroup>
+                    </p:toolbar>
+                </div>
+            </f:view>
+
+
         </h:form>
     </ui:define>
 </ui:composition>

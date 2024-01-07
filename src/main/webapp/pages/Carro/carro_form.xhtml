@@ -12,7 +12,12 @@
                     <h:panelGroup>
                         <div class="p-field">
                             <p:outputLabel for="@next" value="#{msgs.message_marcas_nombre}"></p:outputLabel>
-                            <p:inputText id="marca" required="true" value="#{carroBean.carro_select.id_marca}" />
+                            <p:selectOneMenu id="combustible" required="true"
+                                             value="#{carroBean.carro_select.id_marca}"
+                                             filter="true" filterMatchMode="startsWith"
+                                             effect="fade">
+                                <f:selectItems value="#{carroBean.listado_nombre_marca}"/>
+                            </p:selectOneMenu>
                             <p:message for="@previous"></p:message>
                         </div>
                         <div class="p-field">
