@@ -8,6 +8,7 @@ public class Hoja_de_rutaDto {
 	private Date fecha;
 	private double kms;
 	private String ci;
+	private java.util.Date date;
 
 	public Hoja_de_rutaDto() {}
 
@@ -79,6 +80,12 @@ public class Hoja_de_rutaDto {
 	public void setCi(String ci) {
 		this.ci = ci;
 	}
-	
-	
+
+	public java.util.Date getDate() {
+		return date;
+	}
+
+	public void setDate(java.util.Date date) {
+		this.date = date;
+	}
 }
