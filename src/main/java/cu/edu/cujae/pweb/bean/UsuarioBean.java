@@ -69,13 +69,36 @@ public class UsuarioBean {
                 try{
                     ResponseReciboUtil responseReciboUtil = userService.createUser(this.selectedUser);
                     if (responseReciboUtil.comparar_enum(Respuesta_Enum.Buena)){
-                        JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO,"combustible_bien_insertar");
+                        JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO,"usuario_insertado");
                         PrimeFaces.current().executeScript("PF('manageUserDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
                         PrimeFaces.current().ajax().update("form:dt-users");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
                     }
                     else {
-                        JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "combustible_fallo_insertar");
-                        PrimeFaces.current().executeScript("PF('manageUserDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
+                        if (responseReciboUtil.getMensaje_recibo().trim().equalsIgnoreCase("Nombre completo del usuario vacío")){
+                            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "usuario_nombre_completo_vacio");
+                            PrimeFaces.current().executeScript("PF('manageUserDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
+                        }
+                        else if (responseReciboUtil.getMensaje_recibo().trim().equalsIgnoreCase("Contraseña vacía")){
+                            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "usuario_contrasenna_vacio");
+                            PrimeFaces.current().executeScript("PF('manageUserDialog').hide()");
+                        }
+                        else if (responseReciboUtil.getMensaje_recibo().trim().equalsIgnoreCase("El nombre de usuario está vacío")){
+                            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "usuario_username_vacio");
+                            PrimeFaces.current().executeScript("PF('manageUserDialog').hide()");
+                        }
+                        else if (responseReciboUtil.getMensaje_recibo().trim().equalsIgnoreCase("El correo está vacío")){
+                            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "usuario_email_vacio");
+                            PrimeFaces.current().executeScript("PF('manageUserDialog').hide()");
+                        }
+                        else if (responseReciboUtil.getMensaje_recibo().trim().equalsIgnoreCase("El rol está vacío")){
+                            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "usuario_rol_vacio");
+                            PrimeFaces.current().executeScript("PF('manageUserDialog').hide()");
+                        }
+                        else {
+                            System.out.println(responseReciboUtil.getMensaje_recibo());
+                            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "error_operation");
+                            PrimeFaces.current().executeScript("PF('manageUserDialog').hide()");
+                        }
                     }
                 }catch (Exception e){
                     JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR,"error_operation");
