@@ -7,11 +7,22 @@
         </a>
         <h:link styleClass="logo" outcome="/pages/web/principal.xhtml">
             <p:graphicImage name="primefaces-logo.svg" library="images" />
+
         </h:link>
 
         <h:form styleClass="topbar-form">
             <ul class="topbar-menu">
-                
+                <p:toolbarGroup align="center">
+                    <p:commandLink action="#{lenguageBean.setLenguage('es')}" ajax="false">
+                        <span>Español</span>
+                    </p:commandLink>
+                </p:toolbarGroup>
+
+                <p:toolbarGroup align="center">
+                    <p:commandLink action="#{lenguageBean.setLenguage('en')}" ajax="false">
+                        <span> English</span>
+                    </p:commandLink>
+                </p:toolbarGroup>
             </ul>
         </h:form>
     </div>

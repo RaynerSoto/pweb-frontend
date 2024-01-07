@@ -100,19 +100,20 @@ public class CarroBean {
 				try{
 				    carroService.insertar_datos(carro_select);
 					listado_carros= carroService.listado_carros();
-				   // JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO,"carro_bien_insertar");
+				    JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO,"message_carro_insertar_correcto");//revisar erro
 				    PrimeFaces.current().executeScript("PF('CarroDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
 				    PrimeFaces.current().ajax().update("form:dt-carro");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
 				}catch (Exception e){
-					JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR,"error_operation");
+					JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR,"message_carro_insertar_fallido");
 				}
 			}else{
 				try {
 					carroService.modificar_datos(carro_select);
+					JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO,"message_carro_modificar_correcto");
 					PrimeFaces.current().executeScript("PF('CarroDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
 					PrimeFaces.current().ajax().update("form:dt-carro");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
 				} catch (Exception e) {
-					JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR,"error_operation");
+					JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR,"message_carro_modificar_fallido");
 				}
 			}
 		}
@@ -124,11 +125,14 @@ public class CarroBean {
 			carroService.eliminar_datos(this.carro_select.getIdentificador());
 			this.carro_select = null;
 			listado_carros= carroService.listado_carros();
+			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO,"carro_eliminado");
 			PrimeFaces.current().ajax().update("form:dt-carro");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
 		} catch (Exception e) {
-			e.printStackTrace();
+			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO,"carro_no_eliminado");
 		}
 
 	}
+
+
 
 }
