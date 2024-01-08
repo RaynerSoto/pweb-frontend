@@ -101,7 +101,7 @@ public class CarroBean {
 	//Modificar
 	public void openForEdit(){
 		this.estado = false;
-		System.out.println(estado);
+        System.out.println(estado);
 
 	}
 	//Salvar
@@ -123,6 +123,7 @@ public class CarroBean {
 			}else{
 				try {
 					carroService.modificar_datos(carro_select);
+                    listado_carros= carroService.listado_carros();
 					JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO,"message_carro_modificar_correcto");
 					PrimeFaces.current().executeScript("PF('CarroDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
 					PrimeFaces.current().ajax().update("form:dt-carro");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form

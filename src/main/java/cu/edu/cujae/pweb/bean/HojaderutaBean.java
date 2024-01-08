@@ -144,6 +144,7 @@ public class HojaderutaBean {
                 try {
                     fechas(hojaderuta_select);
                     hojadeRutaService.modificar(hojaderuta_select);
+                    listado_rutas= hojadeRutaService.cargar_hoja_de_ruta();
                     JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO,"message_ruta_modificar_correcto");
                     PrimeFaces.current().executeScript("PF('hojaderutaDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
                     PrimeFaces.current().ajax().update("form:dt-hojaderuta");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
