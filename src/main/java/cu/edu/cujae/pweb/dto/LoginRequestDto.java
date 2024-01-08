@@ -1,4 +1,4 @@
-package cu.edu.cujae.pwebbackend.core.dto;
+package cu.edu.cujae.pweb.dto;
 
 import org.springframework.lang.NonNull;
 
@@ -12,6 +12,11 @@ public class LoginRequestDto {
 	public LoginRequestDto() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public LoginRequestDto(String username,String password) {
+		this.username = username;
+		this.password = password;
 	}
 
 	public String getUsername() {

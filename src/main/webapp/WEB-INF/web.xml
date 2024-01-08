@@ -19,10 +19,6 @@
         <param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
         <param-value>true</param-value>
     </context-param>
-    <context-param>
-        <param-name/>
-        <param-value/>
-    </context-param>
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
@@ -46,6 +42,25 @@
         </session-timeout>
     </session-config>
  	<welcome-file-list>
-        <welcome-file>pages/web/principal.jsf</welcome-file>
+        <welcome-file>pages/security/login.jsf</welcome-file>
     </welcome-file-list>
+    
+    <!-- Spring security -->
+    <filter>
+	    <filter-name>springSecurityFilterChain</filter-name>
+	    <filter-class>
+	        org.springframework.web.filter.DelegatingFilterProxy
+	    </filter-class>
+	</filter>
+	<filter-mapping>
+	    <filter-name>springSecurityFilterChain</filter-name>
+	    <url-pattern>/*</url-pattern>
+	    <dispatcher>FORWARD</dispatcher>
+	    <dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+	<context-param>
+	    <param-name>javax.faces.FACELETS_LIBRARIES</param-name>
+	    <param-value>/WEB-INF/taglib/springsecurity.taglib.xml</param-value>
+	</context-param>
+	
 </web-app>

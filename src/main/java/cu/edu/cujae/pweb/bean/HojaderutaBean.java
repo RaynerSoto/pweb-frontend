@@ -34,7 +34,7 @@ public class HojaderutaBean {
 
     }
 
-    @PostConstruct
+
     public void init() throws Exception{
         listado_rutas = new ArrayList<Hoja_de_rutaDto>();
         try{

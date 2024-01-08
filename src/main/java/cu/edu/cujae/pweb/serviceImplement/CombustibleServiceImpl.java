@@ -1,6 +1,7 @@
 package cu.edu.cujae.pweb.serviceImplement;
 
 import cu.edu.cujae.pweb.dto.CombustibleDto;
+import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.service.CombustibleService;
 import cu.edu.cujae.pweb.util.ResponseReciboUtil;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
@@ -46,7 +47,7 @@ public class CombustibleServiceImpl implements CombustibleService {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         UriTemplate template = new UriTemplate("/api/v1/combustibles/{id}");
         String uri = template.expand(combustibleDto.getId()).toString();
-        String respuesta = (String) restService.DELETE(uri, params, String.class, null).getBody();
+        String respuesta = (String) restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
         responseReciboUtil = apiRestMapper.mapOne(respuesta, ResponseReciboUtil.class);
         return responseReciboUtil;
     }
@@ -56,7 +57,7 @@ public class CombustibleServiceImpl implements CombustibleService {
         ArrayList<CombustibleDto> listado_combustibles = new ArrayList<>();
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         ApiRestMapper<CombustibleDto> apiRestMapper = new ApiRestMapper<>();
-        String respuesta = (String) restService.GET("/api/v1/combustibles/",params,String.class).getBody();
+        String respuesta = (String) restService.GET("/api/v1/combustibles/",params,String.class,CurrentUserUtils.getTokenBearer()).getBody();
         listado_combustibles = (ArrayList<CombustibleDto>) apiRestMapper.mapList(respuesta,CombustibleDto.class);
         return listado_combustibles;
     }
@@ -66,7 +67,7 @@ public class CombustibleServiceImpl implements CombustibleService {
         ArrayList<String> listado_combustibles = new ArrayList<>();
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         ApiRestMapper<String> apiRestMapper = new ApiRestMapper<>();
-        String respuesta = (String) restService.GET("/api/v1/combustibles/nombres",params,String.class).getBody();
+        String respuesta = (String) restService.GET("/api/v1/combustibles/nombres",params,String.class,CurrentUserUtils.getTokenBearer()).getBody();
         try {
             listado_combustibles = (ArrayList<String>) apiRestMapper.mapList(respuesta,String.class);
         }catch (Exception e){

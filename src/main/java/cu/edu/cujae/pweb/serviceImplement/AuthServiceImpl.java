@@ -1,5 +1,6 @@
-package cu.edu.cujae.pweb.service;
+package cu.edu.cujae.pweb.serviceImplement;
 
+import cu.edu.cujae.pweb.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ public class AuthServiceImpl implements AuthService {
 		    String response = (String)restService.POST("/api/v1/auth/login", new LoginRequestDto(username, password), String.class).getBody();
 		    authenticatedDto = apiRestMapper.mapOne(response, UserAuthenticatedDto.class);
 		} catch (Exception e) {
+			e.printStackTrace();
 			authenticatedDto = null;
 		}
 		return authenticatedDto;

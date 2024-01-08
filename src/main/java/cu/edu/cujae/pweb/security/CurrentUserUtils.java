@@ -67,5 +67,4 @@ public class CurrentUserUtils {
 		}
 		return password;
 	}
-	
 }

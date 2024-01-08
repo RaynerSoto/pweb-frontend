@@ -9,7 +9,8 @@
     </h:head>
 
     <h:body>
-	    <h:form>
+	    <h:form prependId="false">
+	        <p:growl for="securityMessages"  globalOnly="true" showDetail="true" showSummary="false" />	
 	    	<p:spacer height="50"></p:spacer>
 	    	<div class="p-grid p-ai-center vertical-container">
 			    <div class="p-col">
@@ -24,13 +25,13 @@
 						<p:panelGrid columns="1" layout="grid">
 					      <h:panelGroup>
 					      	<p:outputLabel for="@next" value="#{msgs.label_username}"/>
-					        <p:inputText value="#{userBean.username}" style="width:100%" required="true"/>
+					        <p:inputText value="#{userBean.username}" style="width:100%" required="true" id="username"/>
 					        <p:message for="@previous"  />
 					      </h:panelGroup>
 					      
 					      <h:panelGroup>
 					      	<p:outputLabel for="@next" value="#{msgs.label_password}"/>
-					      	<p:password style="width:100%" value="#{userBean.password}" required="true"/>
+					      	<p:password style="width:100%" value="#{userBean.password}" required="true" requiredMessage="Valor requerido" id="password"/>
 					      	<p:message for="@previous"  />
 					      </h:panelGroup>
 					    </p:panelGrid>

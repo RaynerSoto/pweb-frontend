@@ -1,4 +1,4 @@
-package cu.edu.cujae.pwebbackend.core.security;
+package cu.edu.cujae.pweb.security;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -6,13 +6,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import cu.edu.cujae.pwebbackend.core.dto.UsuarioDto;
+import cu.edu.cujae.pweb.dto.UserAuthenticatedDto;
+import cu.edu.cujae.pweb.dto.UsuarioDto;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import cu.edu.cujae.pwebbackend.core.dto.UserDto;
+import cu.edu.cujae.pweb.dto.UserDto;
 
 
 public class UserPrincipal implements UserDetails {
@@ -22,18 +23,23 @@ public class UserPrincipal implements UserDetails {
     private String password;
     private String email;
     private String rol;
+    private String token;
     private Collection<? extends GrantedAuthority> authorities;
     private boolean active;
 
-    public UserPrincipal(Long id, String email, String password, boolean active,Collection<? extends GrantedAuthority> authorities) {
+    public UserPrincipal(Long id, String username, String fullName, String password, String email, String rol, String token, Collection<? extends GrantedAuthority> authorities, boolean active) {
         this.id = id;
-        this.email = email;
+        this.username = username;
+        this.fullName = fullName;
         this.password = password;
-        this.active = active;
+        this.email = email;
+        this.rol = rol;
+        this.token = token;
         this.authorities = authorities;
+        this.active = active;
     }
 
-    public static UserPrincipal create(UsuarioDto user) {
+    public static UserPrincipal create(UserAuthenticatedDto user) {
     	List<GrantedAuthority> authorities;
     	try {
     		Collection<String> roleNames = user.getRolList();
@@ -45,14 +51,18 @@ public class UserPrincipal implements UserDetails {
 		}
     	return new UserPrincipal(
                 user.getId(),
-                user.getEmail(),
+                user.getUsername(),
+                user.getFullName(),
                 user.getPassword(),
-                true,
-                authorities
+                user.getEmail(),
+                user.getRol(),
+                user.getToken(),
+                authorities,
+                true
         );
     }
 
-    public static UserPrincipal create(UsuarioDto user, Map<String, Object> attributes) {
+    public static UserPrincipal create(UserAuthenticatedDto user, Map<String, Object> attributes) {
         UserPrincipal userPrincipal = UserPrincipal.create(user);
         return userPrincipal;
     }
@@ -61,12 +71,12 @@ public class UserPrincipal implements UserDetails {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getUserId(){
+        return String.valueOf(this.id);
     }
 
-    public String getIdString(){
-        return String.valueOf(getId());
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
@@ -103,12 +113,12 @@ public class UserPrincipal implements UserDetails {
         this.email = email;
     }
 
-    public String getRol() {
-        return rol;
+    public String getToken() {
+        return token;
     }
 
-    public void setRol(String rol) {
-        this.rol = rol;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     @Override
@@ -147,5 +157,4 @@ public class UserPrincipal implements UserDetails {
     public boolean isEnabled() {
         return active;
     }
-
 }

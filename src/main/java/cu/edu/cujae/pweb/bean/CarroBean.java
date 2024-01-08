@@ -37,8 +37,6 @@ public class CarroBean {
 	public CarroBean() {
 	}
 
-	
-	@PostConstruct
 	public void init() throws Exception {
 		listado_carros = new ArrayList<CarroDto>();
 		try{
