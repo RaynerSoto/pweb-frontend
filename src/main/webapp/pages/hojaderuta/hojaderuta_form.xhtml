@@ -12,7 +12,12 @@
                     <h:panelGroup>
                         <div class="p-field">
                             <p:outputLabel for="@next" value="#{msgs.message_carro_hoja}"></p:outputLabel>
-                            <p:inputText id="id_carro" required="true" value="#{hojaderutaBean.hojaderuta_select.id_carro}" />
+                            <p:selectOneMenu id="combustible" required="true"
+                                             value="#{hojaderutaBean.hojaderuta_select.id_carro}"
+                                             filter="true" filterMatchMode="startsWith"
+                                             effect="fade">
+                                <f:selectItems value="#{hojaderutaBean.carro_placa}"/>
+                            </p:selectOneMenu>
                             <p:message for="@previous"></p:message>
                         </div>
                         <div class="p-field">

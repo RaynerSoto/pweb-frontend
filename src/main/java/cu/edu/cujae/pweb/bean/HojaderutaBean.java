@@ -1,7 +1,9 @@
 package cu.edu.cujae.pweb.bean;
 
 
+import cu.edu.cujae.pweb.dto.CarroDto;
 import cu.edu.cujae.pweb.dto.Hoja_de_rutaDto;
+import cu.edu.cujae.pweb.service.CarroService;
 import cu.edu.cujae.pweb.service.HojadeRutaService;
 import cu.edu.cujae.pweb.utils.JsfUtils;
 import org.primefaces.PrimeFaces;
@@ -22,11 +24,16 @@ import java.util.ArrayList;
 @ViewScoped
 public class HojaderutaBean {
     @Autowired
+    private CarroService carroService;
+    @Autowired
     private HojadeRutaService hojadeRutaService;
+
     private boolean estado;
     private Hoja_de_rutaDto hojaderuta_select;
     private Hoja_de_rutaDto hojaderuta;
     private ArrayList<Hoja_de_rutaDto> listado_rutas;
+    private ArrayList<String>carro_placa;
+    private ArrayList<CarroDto>carros;
     private java.util.Date date = new java.util.Date();
 
 
@@ -36,6 +43,8 @@ public class HojaderutaBean {
 
     @PostConstruct
     public void init() throws Exception{
+        carros= new ArrayList<CarroDto>();
+        carro_placa = new ArrayList<String>();
         listado_rutas = new ArrayList<Hoja_de_rutaDto>();
         try{
             listado_rutas = hojadeRutaService.cargar_hoja_de_ruta();
@@ -89,6 +98,20 @@ public class HojaderutaBean {
         this.listado_rutas = listado_rutas;
     }
 
+    public ArrayList<String> getCarro_placa() throws SQLException, IOException {
+        try{
+            if(carros.size() != carroService.listado_carros().size()){
+                carros = carroService.listado_carros();
+                for(int i=0; i<carros.size();i++){
+                    carro_placa.add(carros.get(i).getPlaca());
+                }
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return carro_placa;
+    }
 
     //Implementacion
     public void openNew(){
