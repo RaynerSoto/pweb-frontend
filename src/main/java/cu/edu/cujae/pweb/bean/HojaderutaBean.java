@@ -31,9 +31,9 @@ public class HojaderutaBean {
     private boolean estado;
     private Hoja_de_rutaDto hojaderuta_select;
     private Hoja_de_rutaDto hojaderuta;
-    private ArrayList<Hoja_de_rutaDto> listado_rutas;
-    private ArrayList<String>carro_placa;
-    private ArrayList<CarroDto>carros;
+    private ArrayList<Hoja_de_rutaDto> listado_rutas = new ArrayList<Hoja_de_rutaDto>();
+    private ArrayList<String>carro_placa = new ArrayList<String>();
+    private ArrayList<CarroDto>carros = new ArrayList<CarroDto>();
     private java.util.Date date = new java.util.Date();
 
 
@@ -42,18 +42,7 @@ public class HojaderutaBean {
     }
 
 
-    public void init() throws Exception{
-        carros= new ArrayList<CarroDto>();
-        carro_placa = new ArrayList<String>();
-        listado_rutas = new ArrayList<Hoja_de_rutaDto>();
-        try{
-            listado_rutas = hojadeRutaService.cargar_hoja_de_ruta();
-        } catch (Exception e) {
-            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "cargar_mala");
-            e.printStackTrace();
-        }
 
-    }
     public HojadeRutaService getHojadeRutaService() {
         return hojadeRutaService;
     }
@@ -144,6 +133,7 @@ public class HojaderutaBean {
                 try {
                     fechas(hojaderuta_select);
                     hojadeRutaService.modificar(hojaderuta_select);
+                    listado_rutas= hojadeRutaService.cargar_hoja_de_ruta();
                     JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO,"message_ruta_modificar_correcto");
                     PrimeFaces.current().executeScript("PF('hojaderutaDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
                     PrimeFaces.current().ajax().update("form:dt-hojaderuta");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form

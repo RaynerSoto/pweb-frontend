@@ -126,6 +126,7 @@ public class MarcaBean {
 		if (nuevo == true) {
 			try {
 				ResponseReciboUtil responseReciboUtil = marcaService.inserta_marca(this.marca_actual);
+				listado_marcas = marcaService.listado_marcas();
 				if (responseReciboUtil.comparar_enum(Respuesta_Enum.Buena)) {
 					JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "marca_insertar_correcta");
 					PrimeFaces.current().executeScript("PF('marcaDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
@@ -140,6 +141,7 @@ public class MarcaBean {
 		} else {
 			try {
 				ResponseReciboUtil responseReciboUtil = marcaService.modificar_marca(this.marca_actual);
+				listado_marcas = marcaService.listado_marcas();
 				if (responseReciboUtil.comparar_enum(Respuesta_Enum.Buena)) {
 					JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "marca_modificada_correcto");
 					PrimeFaces.current().executeScript("PF('marcaDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
@@ -158,6 +160,7 @@ public class MarcaBean {
 	public void deleteMarca() {
 		try {
 			ResponseReciboUtil responseReciboUtil = marcaService.eliminar_marca(this.marca_actual);
+			listado_marcas = marcaService.listado_marcas();
 			if (responseReciboUtil.comparar_enum(Respuesta_Enum.Buena)) {
 				JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "marca_eliminada");
 				PrimeFaces.current().executeScript("PF('marcaDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar

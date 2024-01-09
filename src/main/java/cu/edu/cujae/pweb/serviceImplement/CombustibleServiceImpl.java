@@ -25,7 +25,7 @@ public class CombustibleServiceImpl implements CombustibleService {
     public ResponseReciboUtil inserta_combustible(CombustibleDto combustibleDto) throws Exception{
         ResponseReciboUtil responseReciboUtil = new ResponseReciboUtil();
         ApiRestMapper<ResponseReciboUtil> apiRestMapper = new ApiRestMapper<>();
-        String respuesta = (String) restService.POST("/api/v1/combustibles/",combustibleDto,String.class).getBody();
+        String respuesta = (String) restService.POST("/api/v1/combustibles/",combustibleDto,String.class,CurrentUserUtils.getTokenBearer()).getBody();
         responseReciboUtil = apiRestMapper.mapOne(respuesta, ResponseReciboUtil.class);
         return responseReciboUtil;
     }
@@ -35,7 +35,7 @@ public class CombustibleServiceImpl implements CombustibleService {
         ResponseReciboUtil responseReciboUtil = new ResponseReciboUtil();
         ApiRestMapper<ResponseReciboUtil> apiRestMapper = new ApiRestMapper<>();
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        String respuesta = (String) restService.PUT("/api/v1/combustibles/",params,combustibleDto, String.class).getBody();
+        String respuesta = (String) restService.PUT("/api/v1/combustibles/",params,combustibleDto, String.class,CurrentUserUtils.getTokenBearer()).getBody();
         responseReciboUtil = apiRestMapper.mapOne(respuesta,ResponseReciboUtil.class);
         return responseReciboUtil;
     }

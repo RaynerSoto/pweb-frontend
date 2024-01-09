@@ -80,6 +80,7 @@ public class CombustibleBean {
             if (this.estado == true){
                 try{
                     ResponseReciboUtil responseReciboUtil = combustibleService.inserta_combustible(combustibleDto_seleccionado);
+                    listado_combustibles = combustibleService.listado_combustibles();
                     if (responseReciboUtil.comparar_enum(Respuesta_Enum.Buena)){
                         JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO,"combustible_bien_insertar");
                         PrimeFaces.current().executeScript("PF('combustibleDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
@@ -96,6 +97,7 @@ public class CombustibleBean {
             else {
                 try {
                     ResponseReciboUtil responseReciboUtil = combustibleService.modificar_combustible(combustibleDto_seleccionado);
+                    listado_combustibles = combustibleService.listado_combustibles();
                     PrimeFaces.current().executeScript("PF('combustibleDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
                     PrimeFaces.current().ajax().update("form:dt-combustibles");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
                 }catch (Exception e){
