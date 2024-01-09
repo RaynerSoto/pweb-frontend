@@ -17,7 +17,8 @@ public class UrlRewriteConfigurationProvider extends HttpConfigurationProvider {
                 .addRule(Join.path("/Hoja_de_Ruta").to("/pages/hojaderuta/hojaderuta_list.jsf"))
                 .addRule(Join.path("/Marcas").to("//pages/marca/marca_list.jsf"))
                 .addRule(Join.path("/Combustibles").to("/pages/combustible/combustible_list.jsf"))
-                .addRule(Join.path("/Usuarios").to("/pages/usuario/user-list.jsf"));
+                .addRule(Join.path("/Usuarios").to("/pages/usuario/user-list.jsf"))
+                .addRule(Join.path("/Choferes").to("/pages/chofer/chofer_list.jsf"));
 
     }
 

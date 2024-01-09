@@ -38,6 +38,18 @@
 					
 					    <f:facet name="footer">
 					        <p:commandButton ajax="false" icon="pi pi-sign-in" value="#{msgs.btn_login}" action="#{userBean.login}"/>
+
+							<p:toolbarGroup align="center">
+								<p:commandLink action="#{lenguageBean.setLenguage('es')}" ajax="false">
+									<span>Español</span>
+								</p:commandLink>
+							</p:toolbarGroup>
+
+							<p:toolbarGroup align="center">
+								<p:commandLink action="#{lenguageBean.setLenguage('en')}" ajax="false">
+									<span> English</span>
+								</p:commandLink>
+							</p:toolbarGroup>
 					    </f:facet>
 					</p:card>
 			    </div>
@@ -45,7 +57,7 @@
 			        <div class="box"></div>
 			    </div>
 			</div>
-	        
+
 			
 		</h:form>
     </h:body>
