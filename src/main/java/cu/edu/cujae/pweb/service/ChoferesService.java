@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author Rayner Alejandro Soto Martínez
  * @version 1.0
  */
-public interface ChoferesCubreService {
+public interface ChoferesService {
     public void inserta_chofer(ChoferDto choferDto) throws Exception;
     public void modificar_chofer(ChoferDto choferDto,String ci)throws Exception;
     public void eliminar_chofer(String ci)throws Exception;

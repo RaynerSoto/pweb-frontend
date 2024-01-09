@@ -96,6 +96,11 @@ public class CombustibleBean {
             else {
                 try {
                     ResponseReciboUtil responseReciboUtil = combustibleService.modificar_combustible(combustibleDto_seleccionado);
+                    try {
+                        listado_combustibles = combustibleService.listado_combustibles();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                     PrimeFaces.current().executeScript("PF('combustibleDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
                     PrimeFaces.current().ajax().update("form:dt-combustibles");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
                 }catch (Exception e){

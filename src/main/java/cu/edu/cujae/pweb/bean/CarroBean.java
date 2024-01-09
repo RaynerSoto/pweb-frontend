@@ -142,7 +142,5 @@ public class CarroBean {
 		} catch (Exception e) {
 			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO,"carro_no_eliminado");
 		}
-
 	}
-
 }

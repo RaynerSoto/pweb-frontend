@@ -48,5 +48,4 @@ public class CarroServiceImpl implements CarroService {
         listado_carros = (ArrayList<CarroDto>) apiRestMapper.mapList(respuesta,CarroDto.class);
         return listado_carros;
     }
-
 }
