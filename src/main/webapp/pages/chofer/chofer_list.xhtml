@@ -6,7 +6,7 @@
 
 <ui:composition template="/pages/template/layout.xhtml">
 	<ui:define name="title">
-		Listado de marcas
+		Listado de choferes
 	</ui:define>
 	<ui:define name="layout">
 		<h:form id="form">
@@ -74,7 +74,7 @@
 							</p:commandButton>
 							<p:commandButton class="ui-button-warning rounded-button"
 											 icon="pi pi-trash" process="@this"
-											 action="#{choferBean.deleteMarca}" >
+											 action="#{choferBean.eliminar_chofer()}" >
 								<f:setPropertyActionListener value="#{chofer}"
 															 target="#{choferBean.chofer_actual}" />
 								<p:confirm header="#{msgs.confirmar}" message="#{msgs.message_confirmar_eliminar_marca}" icon="pi pi-exclamation-triangle"/>
