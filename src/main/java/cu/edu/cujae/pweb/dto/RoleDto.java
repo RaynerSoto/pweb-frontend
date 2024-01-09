@@ -6,12 +6,16 @@ public class RoleDto {
 	private String description;
 	
 	public RoleDto(Long id, String roleName, String description) {
-		super();
 		this.id = id;
 		this.roleName = roleName;
 		this.description = description;
 	}
 	
+	public RoleDto() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public Long getId() {
 		return id;
 	}

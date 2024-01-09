@@ -32,25 +32,13 @@ public class CarroBean {
 	private CarroDto carro;
 	private boolean estado ;
 	private CarroDto carro_select;
-	private ArrayList<CarroDto> listado_carros;
-	private ArrayList<MarcaDto> listado_marcas;
-	private ArrayList<String> listado_nombre_marca;
+	private ArrayList<CarroDto> listado_carros = new ArrayList<CarroDto>();
+	private ArrayList<MarcaDto> listado_marcas = new ArrayList<MarcaDto>();
+	private ArrayList<String> listado_nombre_marca = new ArrayList<String>();
 	public CarroBean() {
 	}
 
-	
-	@PostConstruct
-	public void init() throws Exception {
-		listado_marcas = new ArrayList<MarcaDto>();
-		listado_nombre_marca = new ArrayList<String>();
-		listado_carros = new ArrayList<CarroDto>();
-		try{
-			listado_carros = carroService.listado_carros();
-		}catch (Exception e){
-			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "cargar_mala");
-			e.printStackTrace();
-		}
-	}
+
 
 
 	public CarroDto getCarro() {
@@ -60,9 +48,14 @@ public class CarroBean {
 		return carro_select;
 	}
 	public ArrayList<CarroDto> getListado_carros() throws SQLException, IOException {
-		if (listado_carros.size() != carroService.listado_carros().size()){
-			listado_carros= carroService.listado_carros();
+		try {
+			if (listado_carros.size() != carroService.listado_carros().size()){
+				listado_carros= carroService.listado_carros();
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
+
 		return listado_carros;
 	}
 	public ArrayList<String> getListado_nombre_marca() {

@@ -2,6 +2,7 @@ package cu.edu.cujae.pweb.serviceImplement;
 
 import cu.edu.cujae.pweb.dto.CombustibleDto;
 import cu.edu.cujae.pweb.dto.MarcaDto;
+import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.service.MarcaService;
 import cu.edu.cujae.pweb.util.ResponseReciboUtil;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
@@ -25,7 +26,7 @@ public class MarcaServiceImpl implements MarcaService {
     public ResponseReciboUtil inserta_marca(MarcaDto marcaDto) throws Exception {
         ResponseReciboUtil responseReciboUtil = new ResponseReciboUtil();
         ApiRestMapper<ResponseReciboUtil> apiRestMapper = new ApiRestMapper<>();
-        String respuesta = (String) restService.POST("/api/v1/marcas/",marcaDto,String.class).getBody();
+        String respuesta = (String) restService.POST("/api/v1/marcas/",marcaDto,String.class, CurrentUserUtils.getTokenBearer()).getBody();
         responseReciboUtil = apiRestMapper.mapOne(respuesta, ResponseReciboUtil.class);
         return responseReciboUtil;
     }
@@ -35,7 +36,7 @@ public class MarcaServiceImpl implements MarcaService {
         ResponseReciboUtil responseReciboUtil = new ResponseReciboUtil();
         ApiRestMapper<ResponseReciboUtil> apiRestMapper = new ApiRestMapper<>();
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        String respuesta = (String) restService.PUT("/api/v1/marcas/",params,marcaDto, String.class).getBody();
+        String respuesta = (String) restService.PUT("/api/v1/marcas/",params,marcaDto, String.class,CurrentUserUtils.getTokenBearer()).getBody();
         responseReciboUtil = apiRestMapper.mapOne(respuesta,ResponseReciboUtil.class);
         return responseReciboUtil;
     }
@@ -47,7 +48,7 @@ public class MarcaServiceImpl implements MarcaService {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         UriTemplate template = new UriTemplate("/api/v1/marcas/{id}");
         String uri = template.expand(marcaDto.getIdentificador()).toString();
-        String respuesta = (String) restService.DELETE(uri, params, String.class, null).getBody();
+        String respuesta = (String) restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
         responseReciboUtil = apiRestMapper.mapOne(respuesta, ResponseReciboUtil.class);
         return responseReciboUtil;
     }
@@ -57,7 +58,7 @@ public class MarcaServiceImpl implements MarcaService {
         ArrayList<MarcaDto> listado_marcas = new ArrayList<>();
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         ApiRestMapper<MarcaDto> apiRestMapper = new ApiRestMapper<>();
-        String respuesta = (String) restService.GET("/api/v1/marcas/",params,String.class).getBody();
+        String respuesta = (String) restService.GET("/api/v1/marcas/",params,String.class,CurrentUserUtils.getTokenBearer()).getBody();
         listado_marcas = (ArrayList<MarcaDto>) apiRestMapper.mapList(respuesta,MarcaDto.class);
         return listado_marcas;
     }
@@ -66,7 +67,7 @@ public class MarcaServiceImpl implements MarcaService {
         ArrayList<String> listado_marcas = new ArrayList<>();
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         ApiRestMapper<String> apiRestMapper = new ApiRestMapper<>();
-        String respuesta = (String) restService.GET("/api/v1/marcas/nombre",params,String.class).getBody();
+        String respuesta = (String) restService.GET("/api/v1/marcas/nombre",params,String.class,CurrentUserUtils.getTokenBearer()).getBody();
         listado_marcas = (ArrayList<String>) apiRestMapper.mapList(respuesta,String.class);
         return listado_marcas;
     }

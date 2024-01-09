@@ -3,6 +3,7 @@ package cu.edu.cujae.pweb.serviceImplement;
 import cu.edu.cujae.pweb.dto.CombustibleDto;
 import cu.edu.cujae.pweb.dto.UserDto;
 import cu.edu.cujae.pweb.dto.UsuarioDto;
+import cu.edu.cujae.pweb.security.CurrentUserUtils;
 import cu.edu.cujae.pweb.service.UsuarioService;
 import cu.edu.cujae.pweb.util.ResponseReciboUtil;
 import cu.edu.cujae.pweb.utils.ApiRestMapper;
@@ -27,7 +28,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         ArrayList<UsuarioDto> listado_usuarios = new ArrayList<>();
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         ApiRestMapper<UsuarioDto> apiRestMapper = new ApiRestMapper<>();
-        String respuesta = (String) restService.GET("/api/v1/usuarios/",params,String.class).getBody();
+        String respuesta = (String) restService.GET("/api/v1/usuarios/",params,String.class, CurrentUserUtils.getTokenBearer()).getBody();
         listado_usuarios = (ArrayList<UsuarioDto>) apiRestMapper.mapList(respuesta,UsuarioDto.class);
         return listado_usuarios;
     }
@@ -37,7 +38,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         ArrayList<UsuarioDto> listado_usuarios = new ArrayList<>();
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         ApiRestMapper<UsuarioDto> apiRestMapper = new ApiRestMapper<>();
-        String respuesta = (String) restService.GET("/api/v1/usuarios/no_super_administradores",params,String.class).getBody();
+        String respuesta = (String) restService.GET("/api/v1/usuarios/no_super_administradores",params,String.class,CurrentUserUtils.getTokenBearer()).getBody();
         listado_usuarios = (ArrayList<UsuarioDto>) apiRestMapper.mapList(respuesta,UsuarioDto.class);
         return listado_usuarios;
     }
@@ -51,7 +52,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     public ResponseReciboUtil createUser(UsuarioDto user) throws Exception {
         ResponseReciboUtil responseReciboUtil = new ResponseReciboUtil();
         ApiRestMapper<ResponseReciboUtil> apiRestMapper = new ApiRestMapper<>();
-        String respuesta = (String) restService.POST("/api/v1/usuarios/",user,String.class).getBody();
+        String respuesta = (String) restService.POST("/api/v1/usuarios/",user,String.class,CurrentUserUtils.getTokenBearer()).getBody();
         responseReciboUtil = apiRestMapper.mapOne(respuesta, ResponseReciboUtil.class);
         return responseReciboUtil;
     }
@@ -61,7 +62,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         ResponseReciboUtil responseReciboUtil = new ResponseReciboUtil();
         ApiRestMapper<ResponseReciboUtil> apiRestMapper = new ApiRestMapper<>();
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        String respuesta = (String) restService.PUT("/api/v1/usuarios/",params,user, String.class).getBody();
+        String respuesta = (String) restService.PUT("/api/v1/usuarios/",params,user, String.class,CurrentUserUtils.getTokenBearer()).getBody();
         responseReciboUtil = apiRestMapper.mapOne(respuesta,ResponseReciboUtil.class);
         return responseReciboUtil;
     }
@@ -73,7 +74,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         UriTemplate template = new UriTemplate("/api/v1/usuarios/{id}");
         String uri = template.expand(user.getId()).toString();
-        String respuesta = (String) restService.DELETE(uri, params, String.class, null).getBody();
+        String respuesta = (String) restService.DELETE(uri, params, String.class, CurrentUserUtils.getTokenBearer()).getBody();
         responseReciboUtil = apiRestMapper.mapOne(respuesta, ResponseReciboUtil.class);
         return responseReciboUtil;
     }

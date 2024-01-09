@@ -19,7 +19,6 @@ public class LenguageBean {
 
     }
 
-    @PostConstruct
     public void init(){
         locale = JsfUtils.getCurrentLocale();
         locale= new Locale("es");
