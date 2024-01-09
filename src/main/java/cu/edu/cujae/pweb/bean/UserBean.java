@@ -62,15 +62,15 @@ public class UserBean {
 		}
 		return "login";
 	}
-	
+
 	public String logout() {
 		return dispatchToUrl("/logout");
 	}
-	
+
 	public String getUserLogued() {
 		return CurrentUserUtils.getFullName();
 	}
-	
+
 	private String dispatchToUrl(String url) {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest) facesContext.getExternalContext().getRequest();
@@ -81,8 +81,7 @@ public class UserBean {
 			facesContext.responseComplete();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}  
+		}
 		return null;
 	}
-	
 }

@@ -174,7 +174,7 @@ public class MarcaBean {
 				PrimeFaces.current().executeScript("PF('marcaDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
 				PrimeFaces.current().ajax().update("form:dt-marcas");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
 			} else {
-				JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "marca_no_eliminada");
+				JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "recurso_utilizado");
 				PrimeFaces.current().executeScript("PF('marcaDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
 				PrimeFaces.current().ajax().update("form:dt-marcas");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
 			}

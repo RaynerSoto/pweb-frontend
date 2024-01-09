@@ -22,6 +22,8 @@ import java.util.List;
 @ManagedBean
 @ViewScoped //Este es el alcance utilizado para trabajar con Ajax
 public class UsuarioBean {
+    String llave_duplicada = "llave duplicada";
+
     private UsuarioDto userDto;
     private UsuarioDto selectedUser;
     private ArrayList<UsuarioDto> users = new ArrayList<>();
@@ -95,6 +97,10 @@ public class UsuarioBean {
                             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "usuario_rol_vacio");
                             PrimeFaces.current().executeScript("PF('manageUserDialog').hide()");
                         }
+                        else if (responseReciboUtil.getMensaje_recibo().contains("llave duplicada") || responseReciboUtil.getMensaje_recibo().contains("Llave duplicada") || responseReciboUtil.getMensaje_recibo().trim().toLowerCase().contains("llave duplicada") || responseReciboUtil.getMensaje_recibo().trim().toLowerCase().contains("llave")){
+                            JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "llave_duplicada");
+                            PrimeFaces.current().executeScript("PF('manageUserDialog').hide()");
+                        }
                         else {
                             System.out.println(responseReciboUtil.getMensaje_recibo());
                             JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "error_operation");
@@ -109,7 +115,7 @@ public class UsuarioBean {
                 try {
                     ResponseReciboUtil responseReciboUtil = userService.updateUser(this.selectedUser);
                     try{
-                        users = userService.getUsers();
+                        users = userService.getUsers_no_superadmin();
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -130,8 +136,8 @@ public class UsuarioBean {
             ResponseReciboUtil responseReciboUtil = userService.deleteUser(this.selectedUser);
             if (responseReciboUtil.comparar_enum(Respuesta_Enum.Buena)){
                 try {
-                    users = userService.getUsers();
-                    JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO,"combustible_eliminado");
+                    users = userService.getUsers_no_superadmin();
+                    JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO,"usuario_eliminado");
                 }catch (Exception e){
                     JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR,"error_operation");
                 }
@@ -139,7 +145,7 @@ public class UsuarioBean {
                 PrimeFaces.current().ajax().update("form:dt-users");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
             }
             else {
-                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR,"combustible_no_eliminado");
+                JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR,"recurso_utilizado");
                 PrimeFaces.current().executeScript("PF('manageUserDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
                 PrimeFaces.current().ajax().update("form:dt-users");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
             }
@@ -167,8 +173,8 @@ public class UsuarioBean {
 
     public List<UsuarioDto> getUsers() {
         try {
-            if (users.size() != userService.getUsers().size()){
-                users = userService.getUsers();
+            if (users.size() != userService.getUsers_no_superadmin().size()){
+                users = userService.getUsers_no_superadmin();
             }
         } catch (Exception e) {
             e.printStackTrace();

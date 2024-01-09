@@ -18,9 +18,11 @@
         <div class="layout-menu">
                 <div class="menu-category">Administración</div>
                 <div class="menu-items">
+                    <sec:authorize access="hasAnyAuthority('Super-Administrador','Administrador')">
                     <h:link outcome="/pages/usuario/user-list.xhtml">
                         Gestionar usuarios
                     </h:link>
+                    </sec:authorize>
                     <h:link outcome="/pages/combustible/combustible_list.xhtml">
                         Gestionar combustibles
                     </h:link>
@@ -40,45 +42,8 @@
                    		Gestionar servicios(No implementado)
                    	</h:link>
                 </div>
-                <div class="menu-category">Menú</div>
-                <div class="menu-items">
-                    <p:outputPanel >
-                        <a tabindex="0" class="submenu-link">
-                            Menu_Item_1
-                        </a>
-                        <div class="submenu">
-                            <ul>
-                                <li><h:link outcome="/pages/marca/marca_list.xhtml">
-                                    Gestionar Marcas
-                                </h:link></li>
-                                <li><h:link outcome="/pages/Carro/carro_list.xhtml">
-                                    Gestionar carro
-                                </h:link></li>
-                                <li><h:link outcome="/pages/hojaderuta/hojaderuta_list.xhtml">
-                                    Gestionar hoja de ruta
-                                </h:link></li>
-                            </ul>
-                        </div>
-                    </p:outputPanel>
-                    <p:outputPanel >
-                        <a tabindex="0" class="submenu-link">
-                            Menu_Item_2
-                        </a>
-                        <div class="submenu">
-                            <ul>
-                                <li><h:link >
-                                    Submenu_item_2_1
-                                </h:link></li>
-                                <li><h:link>
-                                    Submenu_item_2_2
-                                </h:link></li>
-                                <li><h:link>
-                                    Submenu_item_2_2
-                                </h:link></li>
-                            </ul>
-                        </div>
-                    </p:outputPanel>
-                </div>
+            <p:commandButton action="#{userBean.logout()}" value="#{msgs.salir}"></p:commandButton>
+
         </div>
     </div>
 </ui:composition>
