@@ -32,23 +32,13 @@ public class CarroBean {
 	private CarroDto carro;
 	private boolean estado ;
 	private CarroDto carro_select;
-	private ArrayList<CarroDto> listado_carros;
-	private ArrayList<MarcaDto> listado_marcas;
-	private ArrayList<String> listado_nombre_marca;
+	private ArrayList<CarroDto> listado_carros = new ArrayList<CarroDto>();
+	private ArrayList<MarcaDto> listado_marcas = new ArrayList<MarcaDto>();
+	private ArrayList<String> listado_nombre_marca = new ArrayList<String>();
 	public CarroBean() {
 	}
 
-	public void init() throws Exception {
-		listado_marcas = new ArrayList<MarcaDto>();
-		listado_nombre_marca = new ArrayList<String>();
-		listado_carros = new ArrayList<CarroDto>();
-		try{
-			listado_carros = carroService.listado_carros();
-		}catch (Exception e){
-			JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_ERROR, "cargar_mala");
-			e.printStackTrace();
-		}
-	}
+
 
 
 	public CarroDto getCarro() {
@@ -58,9 +48,14 @@ public class CarroBean {
 		return carro_select;
 	}
 	public ArrayList<CarroDto> getListado_carros() throws SQLException, IOException {
-		if (listado_carros.size() != carroService.listado_carros().size()){
-			listado_carros= carroService.listado_carros();
+		try {
+			if (listado_carros.size() != carroService.listado_carros().size()){
+				listado_carros= carroService.listado_carros();
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
+
 		return listado_carros;
 	}
 	public ArrayList<String> getListado_nombre_marca() {
@@ -99,7 +94,7 @@ public class CarroBean {
 	//Modificar
 	public void openForEdit(){
 		this.estado = false;
-		System.out.println(estado);
+        System.out.println(estado);
 
 	}
 	//Salvar
@@ -121,6 +116,7 @@ public class CarroBean {
 			}else{
 				try {
 					carroService.modificar_datos(carro_select);
+                    listado_carros= carroService.listado_carros();
 					JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO,"message_carro_modificar_correcto");
 					PrimeFaces.current().executeScript("PF('CarroDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
 					PrimeFaces.current().ajax().update("form:dt-carro");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form

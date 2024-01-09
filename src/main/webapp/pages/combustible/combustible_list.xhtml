@@ -14,7 +14,7 @@
                     <p:toolbar>
                         <p:toolbarGroup>
                             <p:commandButton
-                                    value="Nuevo" icon="pi pi-plus"
+                                    value="#{msgs.message_insertar_nuevo}" icon="pi pi-plus"
                                     actionListener="#{combustibleBean.openNew}"
                                     update=":form:combustible-content"
                                     oncomplete="PF('combustibleDialog').show()"
@@ -24,7 +24,7 @@
 
                             <p:toolbarGroup align="right">
                                 <p:commandButton
-                                        value="Export" icon="pi pi-upload"
+                                        value="#{msgs.message_exportar}" icon="pi pi-upload"
                                         styleClass="ui-button-help" ajax="false">
                                     <p:dataExporter type="pdf" target="dt-combustibles" fileName="combustibles" />
                                 </p:commandButton>
@@ -71,9 +71,9 @@
                             <!-- Este comoponente se utiliza mucho para el caso de los eliminar, que es donde casi siempre se necesita confirmation,
                             su uso es bien sencillo, cada confirmDialog va atado a un p:confirm que es el que se definie dentro del button -->
                             <p:confirmDialog global="true" showEffect="fade" width="300">
-                                <p:commandButton value="Si" type="button"
+                                <p:commandButton value="#{msgs.message_yes}" type="button"
                                                  styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
-                                <p:commandButton value="No" type="button"
+                                <p:commandButton value="#{msgs.message_no}" type="button"
                                                  styleClass="ui-confirmdialog-no ui-button-secondary"
                                                  icon="pi pi-times" />
                             </p:confirmDialog>
@@ -81,8 +81,6 @@
                     </p:toolbar>
                 </div>
             </f:view>
-
-
         </h:form>
     </ui:define>
 </ui:composition>
