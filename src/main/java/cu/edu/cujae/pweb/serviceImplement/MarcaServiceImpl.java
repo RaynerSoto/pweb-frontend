@@ -63,11 +63,12 @@ public class MarcaServiceImpl implements MarcaService {
         return listado_marcas;
     }
 
+    @Override
     public ArrayList<String>listado_marcas_nombre() throws Exception{
         ArrayList<String> listado_marcas = new ArrayList<>();
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         ApiRestMapper<String> apiRestMapper = new ApiRestMapper<>();
-        String respuesta = (String) restService.GET("/api/v1/marcas/nombre",params,String.class,CurrentUserUtils.getTokenBearer()).getBody();
+        String respuesta = (String) restService.GET("/api/v1/marcas/nombres",params,String.class,CurrentUserUtils.getTokenBearer()).getBody();
         listado_marcas = (ArrayList<String>) apiRestMapper.mapList(respuesta,String.class);
         return listado_marcas;
     }

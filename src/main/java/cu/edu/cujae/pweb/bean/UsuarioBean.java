@@ -67,6 +67,7 @@ public class UsuarioBean {
         else{
             if (this.estado == true){
                 try{
+                    this.selectedUser.setPassword(encoder.encode(this.selectedUser.getPassword()));
                     ResponseReciboUtil responseReciboUtil = userService.createUser(this.selectedUser);
                     if (responseReciboUtil.comparar_enum(Respuesta_Enum.Buena)){
                         JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO,"usuario_insertado");
@@ -107,6 +108,11 @@ public class UsuarioBean {
             else {
                 try {
                     ResponseReciboUtil responseReciboUtil = userService.updateUser(this.selectedUser);
+                    try{
+                        users = userService.getUsers();
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
                     PrimeFaces.current().executeScript("PF('manageUserDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
                     PrimeFaces.current().ajax().update("form:dt-users");// Este code es para refrescar el componente con id dt-users que se encuentra dentro del formulario con id form
                 }catch (Exception e){
@@ -121,7 +127,6 @@ public class UsuarioBean {
     //Permite eliminar un usuario
     public void deleteUser() {
         try {
-            this.selectedUser.setPassword(encoder.encode(this.selectedUser.getPassword()));
             ResponseReciboUtil responseReciboUtil = userService.deleteUser(this.selectedUser);
             if (responseReciboUtil.comparar_enum(Respuesta_Enum.Buena)){
                 try {

@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="Marca" showEffect="fade" modal="true"
+		widgetVar="choferDialog" responsive="true">
+		<p:outputPanel id="chofer-content" class="ui-fluid">
+			<p:outputPanel rendered="#{not empty choferBean.chofer_actual}">
+				<p:panelGrid layout="grid" columns="2">
+					<h:panelGroup>
+						<div class="p-field">
+							<p:outputLabel for="@next" value="#{msgs.chofer_nombre}"></p:outputLabel>
+							<p:inputText id="nombre" required="true" 
+								value="#{choferBean.chofer_actual.nombre}" />
+							<p:message for="@previous" ></p:message>
+						</div>
+						<div class="p-field">
+							<p:outputLabel for="@next" value="#{msgs.ci}"></p:outputLabel>
+							<p:inputText id="ci" required="true"
+										 value="#{choferBean.chofer_actual.ci}"
+										 maxlength="11">
+								<p:keyFilter mask="num" />
+							</p:inputText>
+							<p:message for="@previous"></p:message>
+						</div>
+
+						<div class="p-field">
+							<p:outputLabel for="@next" value="#{msgs.chofer_direccion}"></p:outputLabel>
+							<p:inputText id="direccion" required="true"
+										 value="#{choferBean.chofer_actual.direccion}" />
+							<p:message for="@previous" ></p:message>
+						</div>
+					</h:panelGroup>
+					<h:panelGroup>
+						<div class="p-field">
+							<p:outputLabel for="@next" value="#{msgs.chofer_telefono}"></p:outputLabel>
+							<p:inputText id="phone" required="true"
+										 value="#{choferBean.chofer_actual.telefono}"
+										 pattern="^\+(?:[0-9] ?){6,14}[0-9]$"/>
+							<p:message for="@previous" ></p:message>
+						</div>
+						<div class="p-field">
+							<p:outputLabel for="@next" value="#{msgs.chofer_provincia}"></p:outputLabel>
+							<p:selectOneMenu id="provincias" required="true"
+											 value="#{choferBean.chofer_actual.provincia}"
+											 filter="true" filterMatchMode="startsWith"
+											 effect="fade">
+								<f:selectItems value="#{choferBean.listado_provincias}"/>
+							</p:selectOneMenu>
+							<p:message for="@previous"></p:message>
+						</div>
+						<div class="p-field">
+							<p:outputLabel for="@next" value="#{msgs.chofer_marca}"></p:outputLabel>
+							<p:selectOneMenu id="marcas" required="true"
+											 value="#{choferBean.chofer_actual.marca}"
+											 filter="true" filterMatchMode="startsWith"
+											 effect="fade">
+								<f:selectItems value="#{choferBean.listado_marcas}"/>
+							</p:selectOneMenu>
+							<p:message for="@previous"></p:message>
+						</div>
+					</h:panelGroup>
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:outputPanel>
+
+		<f:facet name="footer">
+			<p:commandButton value="#{msgs.guardar}" icon="pi pi-check"
+				actionListener="#{choferBean.salveChofer}"
+				update="chofer-content" process="chofer-content @this" />
+			<p:commandButton value="#{msgs.cancelar}" icon="pi pi-times"
+				onclick="PF('choferDialog').hide()" class="ui-button-secondary" />
+		</f:facet>
+	</p:dialog>
+</ui:composition>

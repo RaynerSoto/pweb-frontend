@@ -6,7 +6,7 @@
 
 <ui:composition template="/pages/template/layout.xhtml">
 	<ui:define name="title">
-		Listado de marcas
+		Listado de choferes
 	</ui:define>
 	<ui:define name="layout">
 		<h:form id="form">
@@ -15,61 +15,68 @@
 					<p:toolbar>
 						<p:toolbarGroup>
 							<p:commandButton value="#{msgs.message_insertar_nuevo}" icon="pi pi-plus"
-											 actionListener="#{marcaBean.openNew}"
-											 update=":form:marca-content"
-											 oncomplete="PF('marcaDialog').show()"
+											 actionListener="#{choferBean.openNew}"
+											 update=":form:chofer-content"
+											 oncomplete="PF('choferDialog').show()"
 											 styleClass="ui-button-success" style="margin-right: .5rem">
-								<p:resetInput target=":form:marca-content" />
+								<p:resetInput target=":form:chofer-content" />
 							</p:commandButton>
 						</p:toolbarGroup>
 						<p:toolbarGroup align="right">
 							<p:commandButton value="#{msgs.message_exportar}" icon="pi pi-upload"
 											 styleClass="ui-button-help" ajax="false">
-								<p:dataExporter type="pdf" target="dtmarcas" fileName="marcas" />
+								<p:dataExporter type="pdf" target="dtchofer" fileName="choferes" />
 							</p:commandButton>
 						</p:toolbarGroup>
 					</p:toolbar>
-					<p:dataTable id="dt-marcas" widgetVar="dtmarcas" var="chofer"
-								 value="#{marcaBean.listado_marcas}" reflow="true" paginator="true"
+					<p:dataTable id="dt-chofer" widgetVar="dtchofer" var="chofer"
+								 value="#{choferBean.listado_choferes}" reflow="true" paginator="true"
 								 rows="10" paginatorPosition="bottom">
 						<f:facet name="header">
 							<div class="products-table-header">
-								<span style="font-weight: bold" value="#{msgs.message_marcas}"></span> <span
-									class="filter-container ui-input-icon-left"> <i
-									class="pi pi-search"></i> <p:inputText id="globalFilter" onkeyup="PF('dtmarcas').filter()" placeholder="#{msgs.buscar}" />
+								<span style="font-weight: bold" value="#{msgs.choferes}"></span> <span>
+									class="filter-container ui-input-icon-left"> <i class="pi pi-search"></i>
+								<p:inputText id="globalFilter" onkeyup="PF('dtchofer').filter()" placeholder="#{msgs.buscar}"/>
 							</span>
 							</div>
 						</f:facet>
-
-						<p:column headerText="#{msgs.message_marca_nombre}" sortBy="#{chofer.nombre}" filterBy="#{chofer.nombre}">
+						<p:column headerText="#{msgs.chofer_nombre}" sortBy="#{chofer.nombre}" filterBy="#{chofer.nombre}">
 							<h:outputText value="#{chofer.nombre}" />
 						</p:column>
-						<p:column headerText="#{msgs.message_marca_cantidad_asientos}" sortBy="#{chofer.cant_asientos}"
-								  filterBy="#{chofer.cant_asientos}">
-							<h:outputText value="#{chofer.cant_asientos}" />
+						<p:column headerText="#{msgs.ci}" sortBy="#{chofer.ci}"
+								  filterBy="#{chofer.ci}">
+							<h:outputText value="#{chofer.ci}" />
 						</p:column>
-						<p:column headerText="#{msgs.message_nombre_combustible}" sortBy="#{chofer.combustible}">
-							<h:outputText value="#{chofer.combustible}" />
+						<p:column headerText="#{msgs.chofer_direccion}" sortBy="#{chofer.direccion}">
+							<h:outputText value="#{chofer.direccion}" />
 						</p:column>
-						<p:column headerText="#{msgs.message_consumo}" sortBy="#{chofer.combustible_por_km}"
-								  filterBy="#{chofer.combustible_por_km}">
-							<h:outputText value="#{chofer.combustible_por_km}" />
+						<p:column headerText="#{msgs.chofer_provincia}" sortBy="#{chofer.provincia}"
+								  filterBy="#{chofer.provincia}">
+							<h:outputText value="#{chofer.provincia}" />
+						</p:column>
+						<p:column headerText="#{msgs.chofer_marca}" sortBy="#{chofer.marca}"
+								  filterBy="#{chofer.marca}">
+							<h:outputText value="#{chofer.marca}" />
+						</p:column>
+						<p:column headerText="#{msgs.chofer_telefono}" sortBy="#{chofer.telefono}"
+								  filterBy="#{chofer.telefono}">
+							<h:outputText value="#{chofer.telefono}" />
 						</p:column>
 						<p:column exportable="false">
-							<p:commandButton icon="pi pi-pencil" action="#{marcaBean.openForEdit}"
-											 update=":form:marca-content"
-											 oncomplete="PF('marcaDialog').show()"
+							<p:commandButton icon="pi pi-pencil" action="#{choferBean.openForEdit}"
+											 update=":form:chofer-content"
+											 oncomplete="PF('choferDialog').show()"
 											 styleClass="edit-button rounded-button ui-button-success"
 											 process="@this">
 								<f:setPropertyActionListener value="#{chofer}"
-															 target="#{marcaBean.marca_actual}" />
-								<p:resetInput target=":form:marca-content" />
+															 target="#{choferBean.chofer_actual}" />
+								<p:resetInput target=":form:chofer-content" />
 							</p:commandButton>
 							<p:commandButton class="ui-button-warning rounded-button"
 											 icon="pi pi-trash" process="@this"
-											 action="#{marcaBean.deleteMarca}" >
+											 action="#{choferBean.eliminar_chofer()}" >
 								<f:setPropertyActionListener value="#{chofer}"
-															 target="#{marcaBean.marca_actual}" />
+															 target="#{choferBean.chofer_actual}" />
 								<p:confirm header="#{msgs.confirmar}" message="#{msgs.message_confirmar_eliminar_marca}" icon="pi pi-exclamation-triangle"/>
 							</p:commandButton>
 						</p:column>
@@ -77,7 +84,7 @@
 					</p:dataTable>
 
 					<!-- ui:include es una etiqueta de facelet que permite incluir pages y de esta forma el code no se carga tanto -->
-					<ui:include src="marca_form.xhtml"></ui:include>
+					<ui:include src="chofer_form.xhtml"></ui:include>
 
 					<!-- Este comoponente se utiliza mucho para el caso de los eliminar, que es donde casi siempre se necesita confirmation,
                     su uso es bien sencillo, cada confirmDialog va atado a un p:confirm que es el que se definie dentro del button -->
