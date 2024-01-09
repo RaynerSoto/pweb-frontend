@@ -40,7 +40,6 @@ public class CarroBean {
 
 
 
-
 	public CarroDto getCarro() {
 		return carro;
 	}

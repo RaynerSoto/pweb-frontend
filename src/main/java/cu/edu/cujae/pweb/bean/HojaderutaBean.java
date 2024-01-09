@@ -76,10 +76,14 @@ public class HojaderutaBean {
     }
 
     public ArrayList<Hoja_de_rutaDto> getListado_rutas() throws SQLException, IOException {
-        if (listado_rutas.size() != hojadeRutaService.cargar_hoja_de_ruta().size()){
-            listado_rutas= hojadeRutaService.cargar_hoja_de_ruta();
-        }
 
+        try{
+            if (listado_rutas.size() != hojadeRutaService.cargar_hoja_de_ruta().size()){
+                listado_rutas= hojadeRutaService.cargar_hoja_de_ruta();
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         return listado_rutas;
     }
 

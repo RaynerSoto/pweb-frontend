@@ -141,15 +141,15 @@ public class MarcaBean {
 		} else {
 			try {
 				ResponseReciboUtil responseReciboUtil = marcaService.modificar_marca(this.marca_actual);
-<<<<<<< HEAD
+
 				try {
 					listado_marcas = marcaService.listado_marcas();
 				}catch (Exception e){
 					e.printStackTrace();
 				}
-=======
+
 				listado_marcas = marcaService.listado_marcas();
->>>>>>> d658e4ac2e8b59e5b2aea52db0e6a16f808fd010
+
 				if (responseReciboUtil.comparar_enum(Respuesta_Enum.Buena)) {
 					JsfUtils.addMessageFromBundle(null, FacesMessage.SEVERITY_INFO, "marca_modificada_correcto");
 					PrimeFaces.current().executeScript("PF('marcaDialog').hide()");//Este code permite cerrar el dialog cuyo id es manageUserDialog. Este identificador es el widgetVar
